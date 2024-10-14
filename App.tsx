@@ -10,6 +10,7 @@ import RegistrationForm from "./screens/RegistrationForm";
 import UserCategory from "./screens/kyc/UserCategory";
 import IndividualCategories from "./screens/kyc/IndividualCategory";
 
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -35,6 +36,7 @@ const App = () => {
         <Stack.Screen name="register-form" component={RegistrationForm} />
         <Stack.Screen name="user-categories" component={UserCategory} />
         <Stack.Screen name="individual-categories" component={IndividualCategories} />
+     
       </Stack.Navigator>
     </NavigationContainer>
   );
