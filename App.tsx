@@ -9,6 +9,7 @@ import HomeScreen from "./screens/HomeScreen";
 import RegistrationForm from "./screens/RegistrationForm";
 import UserCategory from "./screens/kyc/UserCategory";
 import IndividualCategories from "./screens/kyc/IndividualCategory";
+import BusinessKyc from "./screens/businessKyc/BusinessKyc";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ const App = () => {
         <Stack.Screen name="register-form" component={RegistrationForm} />
         <Stack.Screen name="user-categories" component={UserCategory} />
         <Stack.Screen name="individual-categories" component={IndividualCategories} />
+        <Stack.Screen name="corporate-categories" component={BusinessKyc} />
      
       </Stack.Navigator>
     </NavigationContainer>
