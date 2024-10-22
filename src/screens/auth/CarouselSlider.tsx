@@ -8,11 +8,12 @@ import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { Button, ButtonOutline } from "@src/components/shared/button";
 import {
   BoldText,
+  LightText,
   RegularText,
   SemiBoldText,
 } from "@src/components/shared/text";
 import { colors } from "@src/resources/colors";
-import { DVH } from "@src/resources/scaling";
+import { DVH, moderateScale } from "@src/resources/scaling";
 
 export const CarouselSlider = ({
   navigation,
@@ -25,6 +26,7 @@ export const CarouselSlider = ({
         showsButtons={false}
         paginationStyle={styles.pagination}
         dotStyle={styles.dot}
+        autoplay={true}
         activeDotStyle={styles.activeDot}>
         {carouselData.map((item, index) => (
           <View key={index} style={styles.itemContainer}>
@@ -34,24 +36,15 @@ export const CarouselSlider = ({
               style={styles.image}
             />
             <View style={styles.textContainer}>
-              <SemiBoldText
-                sizeSmall
-                textStyle={{
-                  color: "#900000",
-                }}>
+              <SemiBoldText sizeSmall mainColor>
                 {item.subtitle}
               </SemiBoldText>
               <BoldText sizeXtraLarge black>
                 {item.title}
               </BoldText>
-              <RegularText
-                sizeSmall
-                textStyle={{
-                  color: colors.lightGray,
-                  lineHeight: DVH(2),
-                }}>
+              <LightText sizeBody black>
                 {item.description}
-              </RegularText>
+              </LightText>
             </View>
           </View>
         ))}
@@ -71,7 +64,7 @@ export const CarouselSlider = ({
           borderMainColor
           sizeBody
           textMainColor
-          onPress={() => {}}
+          onPress={() => navigation.navigate(authScreenNames.ALREADY_HAVE_ACCT)}
         />
       </View>
     </Screen>
@@ -133,5 +126,6 @@ const styles = StyleSheet.create({
   textContainer: {
     justifyContent: "space-between",
     gap: 5,
+    marginLeft: moderateScale(-17),
   },
 });

@@ -3,15 +3,18 @@ import { View, Text, StyleSheet } from "react-native";
 import { Screen } from "../Screen";
 import { AuthScreenProps } from "@src/router/types";
 import { authScreenNames } from "@src/navigation/naviagtion-names";
-import { BoldText, RegularText } from "@src/components/shared/text";
+import { BoldText, LightText, RegularText } from "@src/components/shared/text";
 import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { Button } from "@src/components/shared/button";
+import { colors } from "@src/resources/colors";
+import { AuthHeader } from "@src/components/auth";
 
 export const RegisterInfo = ({
   navigation,
 }: AuthScreenProps<authScreenNames.REGISTER_INFO>) => {
   return (
     <Screen>
+      <AuthHeader onPress={() => navigation.goBack()} />
       <BoldText sizeLarge textStyle={styles.title}>
         Register your account
       </BoldText>
@@ -32,9 +35,9 @@ export const RegisterInfo = ({
             <BoldText sizeBody black>
               Verify your email address
             </BoldText>
-            <RegularText sizeSmall textStyle={styles.stepDescription}>
+            <LightText sizeSmall textStyle={styles.stepDescription}>
               We will send a code to your email, copy and verify on the app.
-            </RegularText>
+            </LightText>
           </View>
         </View>
 
@@ -49,10 +52,10 @@ export const RegisterInfo = ({
             <BoldText sizeBody black>
               Tell us more about you
             </BoldText>
-            <RegularText sizeSmall textStyle={styles.stepDescription}>
+            <LightText sizeSmall textStyle={styles.stepDescription}>
               It is CBN standard guidelines to get KYC details of all account
               holders.
-            </RegularText>
+            </LightText>
           </View>
         </View>
 
@@ -67,10 +70,10 @@ export const RegisterInfo = ({
             <BoldText sizeBody black>
               Setup a Transaction PIN
             </BoldText>
-            <RegularText sizeSmall textStyle={styles.stepDescription}>
+            <LightText sizeSmall textStyle={styles.stepDescription}>
               This is the PIN that secures your account from unauthorised
               access.
-            </RegularText>
+            </LightText>
           </View>
         </View>
       </View>
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     color: "#900000", // dark red color
   },
   title: {
-    color: "#900000", // dark red color
+    color: colors.main_color, // dark red color
     marginBottom: DVH(1),
   },
   subtitle: {
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stepDescription: {
-    color: "#8A8A8A",
+    color: colors.black,
     marginTop: moderateScale(4),
     lineHeight: DVH(2),
   },

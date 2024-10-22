@@ -1,16 +1,12 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { AuthScreenProps } from "@src/router/types";
 import { userCategoriesOptions } from "@src/contants/user-categories-options";
 import { Screen } from "../Screen";
+import { DVH, moderateScale } from "@src/resources/scaling";
+import { BoldText, LightText } from "@src/components/shared/text";
 
 export const UserCategories =
   ({}: AuthScreenProps<authScreenNames.USER_CATEGORIES>) => {
@@ -21,16 +17,24 @@ export const UserCategories =
           navigation.navigate(item.NavigateTo);
         }}
         style={styles.card}>
-        <Text style={styles.cardTitle}>{item.title}</Text>
-        <Text>{item.description}</Text>
+        <BoldText sizeMedium mainColor>
+          {item.title}
+        </BoldText>
+        <LightText sizeBody black>
+          {item.description}
+        </LightText>
       </TouchableOpacity>
     );
 
     return (
       <Screen>
-        <View style={{ gap: 4 }}>
-          <Text style={styles.textHeader}>Choose an option</Text>
-          <Text>Kindly select an option from below</Text>
+        <View style={styles.titleContainer}>
+          <BoldText mainColor sizeLarge>
+            Choose an Option
+          </BoldText>
+          <LightText sizeBody black>
+            Kindly select an option from below
+          </LightText>
         </View>
         <FlatList
           data={userCategoriesOptions}
@@ -44,6 +48,10 @@ export const UserCategories =
   };
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    gap: moderateScale(10),
+    marginBottom: "10%",
+  },
   container: {
     flex: 1,
     padding: 20,
@@ -58,21 +66,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   card: {
-    width: 352,
-    height: 146,
-    backgroundColor: "#e5e4e2",
-    marginVertical: 14,
-    borderRadius: 10,
+    width: "98%",
+    height: DVH(17),
+    backgroundColor: "#F6F6F6",
+    marginVertical: moderateScale(14),
+    borderRadius: moderateScale(10),
     elevation: 5,
-    padding: 20,
-    // marginBottom: 16,
-    // shadowColor: '#000',
+    padding: moderateScale(20),
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.3,
     shadowRadius: 4,
+    alignSelf: "center",
+    gap: moderateScale(7),
   },
   cardTitle: {
     fontWeight: "bold",

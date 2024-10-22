@@ -8,7 +8,7 @@ export const useInput = () => {
     if (textInputFocus) {
       return colors.black;
     } else if (!textInputFocus) {
-      return colors.black;
+      return colors.lightGray;
     } else {
       return undefined;
     }

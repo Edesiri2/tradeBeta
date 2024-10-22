@@ -1,296 +1,205 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Modal,
-  Dimensions,
-} from "react-native";
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { Button, ButtonOutline } from "@src/components/shared/button";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import { View, Text, StyleSheet, Modal } from "react-native";
 import { AuthScreenProps } from "@src/router/types";
 import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { CheckBox } from "@src/common";
 import { Screen } from "../Screen";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  referralCode: Yup.string().optional(),
-});
-
-const { height } = Dimensions.get("window");
+import { AuthHeader } from "@src/components/auth";
+import { BoldText, LightText } from "@src/components/shared/text";
+import { DVH, moderateScale, screenHeight } from "@src/resources/scaling";
+import { TextInputs } from "@src/components/shared/input/Input";
+import { colors } from "@src/resources/colors";
+import { Button, ButtonOutline } from "@src/components/shared/button";
+import { Controller, useForm } from "react-hook-form";
+import { registrationFrmTypes } from "@src/form/schema/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registrationFrmSchema } from "@src/form/validation/rules";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ScrollContainer } from "../Scroll-Container";
 
 export const RegistrationForm = ({
   navigation,
 }: AuthScreenProps<authScreenNames.REGISTRATION_FORM>) => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<registrationFrmTypes>({
+    mode: "onChange",
+    resolver: yupResolver(registrationFrmSchema),
+  });
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const handleContinue = () => {
-    if (termsAccepted) {
-      setModalVisible(true);
+  const onSubmit = (data: registrationFrmTypes) => {
+    if (data) {
+      setModalVisible(!modalVisible);
     }
   };
 
   return (
-    <Screen>
-      <View style={{ marginLeft: 20 }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <MaterialIcons name='arrow-back-ios' size={24} color='#CBA78C' />
-        </TouchableOpacity>
-      </View>
-
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Register your account</Text>
-        <Text style={styles.subtitle}>
-          Complete the sign up to get started.
-        </Text>
-
-        <Formik
-          initialValues={{ email: "", password: "", referralCode: "" }}
-          validationSchema={validationSchema}
-          onSubmit={handleContinue}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <>
-              <Text style={styles.label}>Email</Text>
-              <View style={styles.inputContainer}>
-                <FontAwesome
-                  name='envelope'
-                  size={24}
-                  color='#000'
-                  style={styles.icon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder='Email'
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  keyboardType='email-address'
-                />
-              </View>
-              {touched.email && errors.email && (
-                <Text style={styles.errorText}>{errors.email}</Text>
-              )}
-              <Text style={styles.label}>Password</Text>
-              <View style={styles.inputContainer}>
-                <FontAwesome
-                  name='lock'
-                  size={24}
-                  color='#000'
-                  style={styles.icon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder='Password'
-                  secureTextEntry={!passwordVisible}
-                  value={values.password}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                />
-                <TouchableOpacity
-                  onPress={togglePasswordVisibility}
-                  style={styles.iconButton}>
-                  <MaterialIcons
-                    name={passwordVisible ? "visibility" : "visibility-off"}
-                    size={24}
-                    color='#900000'
-                  />
-                </TouchableOpacity>
-              </View>
-              {touched.password && errors.password && (
-                <Text style={styles.errorText}>{errors.password}</Text>
-              )}
-              <Text style={styles.label}>Referral Code</Text>
-              <View style={styles.inputContainer}>
-                <FontAwesome
-                  name='tag'
-                  size={24}
-                  color='#000'
-                  style={styles.icon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder='Enter a referral code'
-                  value={values.referralCode}
-                  onChangeText={handleChange("referralCode")}
-                  onBlur={handleBlur("referralCode")}
-                />
-              </View>
-              <View style={{ marginTop: 100 }}>
-                <View style={styles.checkboxContainer}>
-                  <CheckBox
-                    isChecked={termsAccepted}
-                    onToggle={() => setTermsAccepted(!termsAccepted)}
-                  />
-                  <Text style={styles.checkboxLabel}>
-                    By signing up, you agree to the{" "}
-                    <Text style={styles.link}>Terms of Service</Text> and{" "}
-                    <Text style={styles.link}>Privacy Policy</Text>.
-                  </Text>
-                </View>
-
-                <View style={{ alignItems: "center", marginBottom: 16 }}>
-                  {termsAccepted ? (
-                    <ButtonOutline
-                      title='Continue'
-                      sizeBody
-                      textMainColor
-                      borderMainColor
-                      onPress={handleSubmit}
-                      disabled={!termsAccepted}
-                    />
-                  ) : (
-                    <Button
-                      title='Continue'
-                      sizeBody
-                      textWhite
-                      bgMainColor
-                      onPress={handleSubmit}
-                      disabled={!termsAccepted}
-                    />
-                  )}
-                </View>
-              </View>
-            </>
-          )}
-        </Formik>
-
-        <Modal
-          animationType='slide'
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <MaterialIcons
-                name='check-circle-outline'
-                size={100}
-                color='green'
-              />
-              <View style={{ marginVertical: 20 }}>
-                <Text style={styles.modalTitle}>Verification Email Sent!</Text>
-                <Text style={styles.modalMessage}>
-                  Check your email and click the link to verify your email
-                  address
-                </Text>
-              </View>
-              <Button
-                title='Continue'
-                sizeBody
-                textWhite
-                bgMainColor
-                onPress={() => {
-                  navigation.navigate(authScreenNames.USER_CATEGORIES),
-                    setModalVisible(false);
-                }}
-              />
-              <ButtonOutline
-                title='Check Email'
-                sizeBody
-                textMainColor
-                borderMainColor
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-              />
-            </View>
+    <>
+      <Screen>
+        <AuthHeader onPress={() => navigation.goBack()} />
+        <ScrollContainer style={{}}>
+          <View style={styles.titleContainer}>
+            <BoldText sizeLarge mainColor>
+              Register your account
+            </BoldText>
+            <LightText sizeBody black>
+              Complete the sign up to get started.
+            </LightText>
           </View>
-        </Modal>
-      </ScrollView>
-    </Screen>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <TextInputs
+                label='Email'
+                placeholder='a@example.com'
+                iconName='mail'
+                iconFamily='Entypo'
+                error={errors?.email?.message}
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                showErrorText
+              />
+            )}
+            name='email'
+            defaultValue=''
+          />
+
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <TextInputs
+                label='Password'
+                placeholder='******'
+                iconName='lock'
+                iconFamily='FontAwesome'
+                passwordInput
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                error={errors?.password?.message}
+                showErrorText
+              />
+            )}
+            name='password'
+            defaultValue=''
+          />
+
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <TextInputs
+                label='Referral Code'
+                placeholder='Enter a referral code'
+                iconName='users'
+                iconFamily='Entypo'
+                error={errors?.referral_code?.message}
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                showErrorText
+              />
+            )}
+            name='referral_code'
+            defaultValue=''
+          />
+
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              isChecked={termsAccepted}
+              onToggle={() => setTermsAccepted(!termsAccepted)}
+            />
+            <Text style={styles.checkboxLabel}>
+              By signing up, you agree to the{" "}
+              <Text style={styles.link}>Terms of Service</Text> and{" "}
+              <Text style={styles.link}>Privacy Policy</Text>.
+            </Text>
+          </View>
+          <Button
+            title='Continue'
+            sizeBody
+            textWhite={termsAccepted ? true : false}
+            textBlack={!termsAccepted ? true : false}
+            style={{
+              backgroundColor: termsAccepted
+                ? colors.main_color
+                : colors.lightGray,
+              width: "100%",
+            }}
+            onPress={handleSubmit(onSubmit)}
+            disabled={!termsAccepted ? true : false}
+          />
+        </ScrollContainer>
+      </Screen>
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name='check-circle-outline'
+              size={100}
+              color='green'
+            />
+            <View style={{ marginVertical: moderateScale(20) }}>
+              <Text style={styles.modalTitle}>Verification Email Sent!</Text>
+              <Text style={styles.modalMessage}>
+                Check your email and click the link to verify your email address
+              </Text>
+            </View>
+            <Button
+              title='Continue'
+              bgMainColor
+              sizeBody
+              textWhite
+              style={{
+                width: "100%",
+              }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                navigation.navigate(authScreenNames.REGISTRATION_OTP);
+              }}
+            />
+            <ButtonOutline
+              borderMainColor
+              textBlack
+              sizeBody
+              title='Check Email'
+              style={{
+                width: "100%",
+              }}
+              onPress={() => navigation.navigate("")}
+            />
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    backgroundColor: "#fff",
-    flexGrow: 1,
-  },
-  backButton: {
-    alignSelf: "flex-start",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#DB3A09",
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "#707070",
-    marginBottom: 20,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 20,
-    marginVertical: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    borderColor: "gray",
-    borderWidth: 1,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: "black",
-    borderRadius: 20,
-  },
-  iconButton: {
-    paddingHorizontal: 10,
-  },
-  label: {
-    fontSize: 16,
-    color: "gray",
-    marginBottom: 5,
-  },
-  errorText: {
-    color: "red",
-    fontSize: 12,
-    marginTop: 5,
+  titleContainer: {
+    gap: moderateScale(10),
+    marginBottom: DVH(5),
   },
   checkboxContainer: {
+    width: "80%",
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
-    gap: 10,
+    marginTop: "30%",
+    marginBottom: moderateScale(10),
+    gap: moderateScale(10),
   },
   checkboxLabel: {
-    fontSize: 14,
     color: "#707070",
   },
   link: {
-    color: "#900000",
+    color: colors.main_color,
   },
   modalContainer: {
     flex: 1,
@@ -298,13 +207,14 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    height: height / 2,
+    height: screenHeight / 2,
     backgroundColor: "white",
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     alignItems: "center",
   },
+
   modalTitle: {
     fontSize: 24,
     fontWeight: "bold",
@@ -316,13 +226,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginBottom: 20,
-  },
-  closeButton: {
-    padding: 10,
-    backgroundColor: "#900000",
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: "white",
   },
 });

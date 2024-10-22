@@ -119,14 +119,34 @@ export const TextInputs: React.FC<inputProps> = ({
   return (
     <>
       <View style={styles.textMainContainer}>
+        {label && (
+          <Text
+            style={[
+              styles.labelText,
+              {
+                color:
+                  dropDown || editable === false ? colors.white : colors.black,
+                marginBottom: moderateScale(5),
+              },
+            ]}>
+            {label}
+          </Text>
+        )}
         <View
           style={[
             styles.textContainer,
             {
+              alignSelf: inputStyle?.alignSelf
+                ? inputStyle?.alignSelf
+                : undefined,
               width: inputStyle ? inputStyle?.width : "100%",
               borderColor: getBorderColor(),
               backgroundColor:
-                dropDown || editable === false ? colors.white : colors.white,
+                dropDown || editable === false
+                  ? colors.lightGray
+                  : inputStyle?.backgroundColor
+                  ? inputStyle?.backgroundColor
+                  : colors.white,
               height: inputStyle?.height ? inputStyle.height : DVH(6),
             },
           ]}>
@@ -170,10 +190,17 @@ export const TextInputs: React.FC<inputProps> = ({
                 styles.textInput,
                 {
                   color: colors.black,
-                  width: inputWidth ? inputWidth : iconName ? "80%" : "90%",
+                  width:
+                    iconName && dropDown
+                      ? "80%"
+                      : inputWidth
+                      ? inputWidth
+                      : iconName
+                      ? "90%"
+                      : "90%",
                 },
               ]}
-              placeholderTextColor={colors.lightGray}
+              placeholderTextColor={colors.darkGray}
               keyboardType={
                 numberInput || phoneNumberInput ? "number-pad" : "default"
               }
@@ -235,8 +262,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     paddingHorizontal: layout.size10,
-    borderWidth: DVW(0.3),
-    borderRadius: layout.size22,
+    borderWidth: DVW(0.4),
+    borderRadius: moderateScale(22),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

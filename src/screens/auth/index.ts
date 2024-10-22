@@ -2,3 +2,8 @@ export * from "./CarouselSlider";
 export * from "./RegisterInfo";
 export * from "./RegistrationForm";
 export * from "./UserCategories";
+export * from "./AlreadyHaveAcct";
+export * from "./ForgotPassword";
+export * from "./SetNewPassword";
+export * from "./RegistrationOTP";
+export * from "./IndividualCategories";

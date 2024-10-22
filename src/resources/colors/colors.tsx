@@ -5,6 +5,7 @@ export enum colors {
   light_green = "#00CD6F",
   warning = "#FF0B0B",
   main_color = "#DB3A09",
+  main_light_color = "#F8D8CE",
   blue = "#009CF3",
   darkGray = "#8D8D8D",
   modalBg = "#00000067",
