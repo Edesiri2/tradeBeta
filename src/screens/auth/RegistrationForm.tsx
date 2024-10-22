@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Modal } from "react-native";
+import { View, Text, StyleSheet, Modal, Platform } from "react-native";
 import { AuthScreenProps } from "@src/router/types";
 import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { CheckBox } from "@src/common";
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     width: "80%",
     flexDirection: "row",
     alignItems: "center",
-    marginTop: "30%",
+    marginTop: Platform.OS === "ios" ? "30%" : "20%",
     marginBottom: moderateScale(10),
     gap: moderateScale(10),
   },
@@ -207,24 +207,24 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    height: screenHeight / 2,
-    backgroundColor: "white",
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    height: Platform.OS === "ios" ? screenHeight / 2 : screenHeight / 1.9,
+    backgroundColor: colors.white,
+    padding: moderateScale(20),
+    borderTopLeftRadius: moderateScale(20),
+    borderTopRightRadius: moderateScale(20),
     alignItems: "center",
   },
 
   modalTitle: {
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     color: "#ff4500",
     textAlign: "center",
   },
   modalMessage: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: moderateScale(20),
   },
 });

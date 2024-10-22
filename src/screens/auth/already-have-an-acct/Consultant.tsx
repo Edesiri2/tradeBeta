@@ -1,6 +1,6 @@
 import { Button } from "@src/components/shared/button";
 import { BoldText, LightText } from "@src/components/shared/text";
-import { moderateScale } from "@src/resources/scaling";
+import { DVH, moderateScale, screenHeight } from "@src/resources/scaling";
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     width: "100%",
-    height: "60%",
+    height: "55%",
     borderRadius: moderateScale(20),
     overflow: "hidden",
     marginBottom: moderateScale(20),

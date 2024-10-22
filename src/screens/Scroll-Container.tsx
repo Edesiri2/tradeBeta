@@ -12,15 +12,17 @@ import {
 type scrollContainerProps = {
   children: React.ReactNode;
   style: StyleProp<ViewStyle>;
+  height?: any;
 };
 
 export const ScrollContainer: React.FC<scrollContainerProps> = ({
   children,
   style,
+  height,
 }) => {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ height: height ? height : undefined }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : undefined}>
       <ScrollView
@@ -35,6 +37,6 @@ export const ScrollContainer: React.FC<scrollContainerProps> = ({
 const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
-    // marginBottom: layout.size45,
+    //marginBottom: layout.size45,
   },
 });

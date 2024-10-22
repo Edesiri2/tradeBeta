@@ -1,7 +1,17 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Tradebeta to access your camera",
+          "microphonePermission": "Allow Tradebeta to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
     "name": "tradebeta_2",
-    "slug": "tradebeta_2",
+    "slug": "Tradebeta",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

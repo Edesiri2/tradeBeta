@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: DVH(3),
+    marginBottom: moderateScale(3),
   },
   checkbox: {
     margin: moderateScale(8),

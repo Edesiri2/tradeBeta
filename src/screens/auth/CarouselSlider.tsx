@@ -13,7 +13,7 @@ import {
   SemiBoldText,
 } from "@src/components/shared/text";
 import { colors } from "@src/resources/colors";
-import { DVH, moderateScale } from "@src/resources/scaling";
+import { DVH, moderateScale, screenWidth } from "@src/resources/scaling";
 
 export const CarouselSlider = ({
   navigation,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   image: {
-    width: 352,
+    width: screenWidth - 20,
     height: 386,
     borderRadius: 24,
     marginBottom: 20,
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "column",
     alignItems: "center",
-    gap: 10,
-    marginTop: 10,
+    gap: moderateScale(10),
+    marginTop: moderateScale(10),
   },
 
   buttonText: {

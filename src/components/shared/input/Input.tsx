@@ -125,7 +125,7 @@ export const TextInputs: React.FC<inputProps> = ({
               styles.labelText,
               {
                 color:
-                  dropDown || editable === false ? colors.white : colors.black,
+                  dropDown || editable === false ? colors.black : colors.black,
                 marginBottom: moderateScale(5),
               },
             ]}>
@@ -143,7 +143,7 @@ export const TextInputs: React.FC<inputProps> = ({
               borderColor: getBorderColor(),
               backgroundColor:
                 dropDown || editable === false
-                  ? colors.lightGray
+                  ? colors.white
                   : inputStyle?.backgroundColor
                   ? inputStyle?.backgroundColor
                   : colors.white,

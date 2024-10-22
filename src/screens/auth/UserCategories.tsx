@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { AuthScreenProps } from "@src/router/types";
@@ -20,7 +26,12 @@ export const UserCategories =
         <BoldText sizeMedium mainColor>
           {item.title}
         </BoldText>
-        <LightText sizeBody black>
+        <LightText
+          sizeBody
+          black
+          textStyle={{
+            lineHeight: Platform.OS !== "ios" ? moderateScale(20) : undefined,
+          }}>
           {item.description}
         </LightText>
       </TouchableOpacity>
@@ -67,9 +78,9 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "98%",
-    height: DVH(17),
     backgroundColor: "#F6F6F6",
-    marginVertical: moderateScale(14),
+    paddingVertical: moderateScale(20),
+    marginBottom: moderateScale(20),
     borderRadius: moderateScale(10),
     elevation: 5,
     padding: moderateScale(20),
@@ -80,11 +91,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     alignSelf: "center",
-    gap: moderateScale(7),
-  },
-  cardTitle: {
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "#DB3A09",
+    gap: Platform.OS === "ios" ? moderateScale(7) : undefined,
   },
 });

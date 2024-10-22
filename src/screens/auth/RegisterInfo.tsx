@@ -91,24 +91,6 @@ export const RegisterInfo = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    padding: 16,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#F8E9E9",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: "#900000", // dark red color
-  },
   title: {
     color: colors.main_color, // dark red color
     marginBottom: DVH(1),
@@ -118,7 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: DVH(3),
   },
   stepsContainer: {
-    flex: 1,
+    height: "68%",
   },
   step: {
     flexDirection: "row",
