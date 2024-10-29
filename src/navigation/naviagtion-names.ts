@@ -2,6 +2,7 @@ export enum authScreenNames {
   BUSINESS_KYC = "BusinessKYC",
   CAROUSEL_SLIDER = "CarouselSlider",
   INDIVIDUAL_CATEGORIES = "IndividualCategories",
+  BUSINESS_CATEGORIES = "BusinessCategories",
   REGISTER_INFO = "RegisterInfo",
   REGISTRATION_FORM = "RegistrationForm",
   USER_CATEGORIES = "UserCategories",
@@ -9,4 +10,6 @@ export enum authScreenNames {
   FORGOT_PASSWORD = "ForgotPassword",
   SET_NEW_PASSWORD = "SetNewPassword",
   REGISTRATION_OTP = "RegistrationOTP",
+  CREATE_TRANSACTION_PIN = "CreateTransactionPin",
+  CONFIRM_TRANSACTION_PIN = "ConfirmTransactionPin",
 }

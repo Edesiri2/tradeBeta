@@ -95,6 +95,7 @@ export const Button: React.FC<buttonProps> = ({
           width: style?.width ? style?.width : "95%",
           borderWidth: style?.borderColor ? DVW(0.2) : undefined,
           borderColor: style?.borderColor ? style?.borderColor : undefined,
+          height: style?.height ? style?.height : DVH(6.5),
         },
       ]}>
       {isLoading ? (
@@ -131,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: moderateScale(10),
-    paddingVertical: Platform.OS === "ios" ? DVH(2) : DVH(1.7),
     alignSelf: "center",
     borderRadius: moderateScale(30),
     marginBottom: verticalScale(5),

@@ -8,6 +8,12 @@
           "microphonePermission": "Allow Tradebeta to access your microphone",
           "recordAudioAndroid": true
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "name": "tradebeta_2",

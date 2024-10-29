@@ -2,6 +2,7 @@ import { authScreenTypes } from "@src/types/types";
 import { authScreenNames } from "./naviagtion-names";
 import {
   AlreadyHaveAcct,
+  BusinessCategories,
   CarouselSlider,
   ForgotPassword,
   IndividualCategories,
@@ -11,6 +12,10 @@ import {
   SetNewPassword,
   UserCategories,
 } from "@src/screens/auth";
+import {
+  ConfirmTransactionPin,
+  CreateTransactionPin,
+} from "@src/screens/auth/transaction-pin";
 
 export const authScreen: authScreenTypes[] = [
   {
@@ -48,5 +53,17 @@ export const authScreen: authScreenTypes[] = [
   {
     screenName: authScreenNames.INDIVIDUAL_CATEGORIES,
     component: IndividualCategories,
+  },
+  {
+    screenName: authScreenNames.BUSINESS_CATEGORIES,
+    component: BusinessCategories,
+  },
+  {
+    screenName: authScreenNames.CREATE_TRANSACTION_PIN,
+    component: CreateTransactionPin,
+  },
+  {
+    screenName: authScreenNames.CONFIRM_TRANSACTION_PIN,
+    component: ConfirmTransactionPin,
   },
 ];

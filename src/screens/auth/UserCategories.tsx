@@ -30,7 +30,8 @@ export const UserCategories =
           sizeBody
           black
           textStyle={{
-            lineHeight: Platform.OS !== "ios" ? moderateScale(20) : undefined,
+            lineHeight:
+              Platform.OS !== "ios" ? moderateScale(20) : moderateScale(25),
           }}>
           {item.description}
         </LightText>

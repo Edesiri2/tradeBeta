@@ -36,3 +36,22 @@ export type individualCategoriesStep2FrmTypes = {
 export type individualCategoriesStep3FrmTypes = {
   image: string;
 };
+
+export type businessCategoriesStep1FrmTypes = {
+  business_name: string;
+  business_class: string;
+  business_number: string;
+  cac_reg_number: string;
+};
+
+export type businessCategoriesStep2FrmTypes = {
+  country: string;
+  state: string;
+  lga: string;
+  address_line: string;
+  postal_code: string;
+};
+
+export type businessCategoriesStep3FrmTypes = {
+  cac_certificate: string;
+};

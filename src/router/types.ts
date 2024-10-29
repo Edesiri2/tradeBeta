@@ -11,6 +11,11 @@ export interface AuthStackParamList extends ParamListBase {
   BusinessKYC: undefined;
   IndividualCategories: undefined;
   UserCategories: undefined;
+  BusinessCategories: undefined;
+  CreateTransactionPin: undefined;
+  ConfirmTransactionPin: {
+    transPin: any;
+  };
 }
 
 export type AuthScreenProps<ScreenName extends keyof AuthStackParamList> =

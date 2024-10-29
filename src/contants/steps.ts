@@ -3,3 +3,9 @@ export const individualKYCFrmSteps = [
   "Address",
   "ID Verification",
 ];
+
+export const businessKYCFrmSteps = [
+  "Business Info",
+  "Address",
+  "Verify Business",
+];

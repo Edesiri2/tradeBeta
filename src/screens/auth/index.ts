@@ -7,3 +7,4 @@ export * from "./ForgotPassword";
 export * from "./SetNewPassword";
 export * from "./RegistrationOTP";
 export * from "./IndividualCategories";
+export * from "./BusinessCategories";

@@ -65,3 +65,22 @@ export const individualCategoriesStep2FrmSchema = yup.object().shape({
 export const individualCategoriesStep3FrmSchema = yup.object().shape({
   image: yup.string().required("image is required"),
 });
+
+export const businessCategoriesStep1FrmSchema = yup.object().shape({
+  business_name: yup.string().required("business name is required"),
+  business_class: yup.string().required("business class is required"),
+  business_number: yup.string().required("business no. is required"),
+  cac_reg_number: yup.string().required("cac registration no. is required"),
+});
+
+export const businessCategoriesStep2FrmSchema = yup.object().shape({
+  country: yup.string().required("country is not selected"),
+  state: yup.string().required("state is not selected"),
+  lga: yup.string().required("LGA is required"),
+  address_line: yup.string().required("address line is required"),
+  postal_code: yup.string().required("postal code is required"),
+});
+
+export const businessCategoriesStep3FrmSchema = yup.object().shape({
+  cac_certificate: yup.string().required("certificate not picked yet"),
+});

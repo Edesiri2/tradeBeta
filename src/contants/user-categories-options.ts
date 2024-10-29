@@ -18,8 +18,8 @@ export const userCategoriesOptions: Option[] = [
   {
     id: "2",
     title: "Corporate",
-    NavigateTo: "corporate-categories",
+    NavigateTo: authScreenNames.BUSINESS_CATEGORIES,
     description:
-      "Register as a corporate entity and provide business information including your registration details.",
+      "Register as a corporate entity and supply your business details inclusive of your CAC registration details and certificate.",
   },
 ];
