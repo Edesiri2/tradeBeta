@@ -12,4 +12,5 @@ export enum authScreenNames {
   REGISTRATION_OTP = "RegistrationOTP",
   CREATE_TRANSACTION_PIN = "CreateTransactionPin",
   CONFIRM_TRANSACTION_PIN = "ConfirmTransactionPin",
+  Chat = "Chat",
 }

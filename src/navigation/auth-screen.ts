@@ -16,6 +16,8 @@ import {
   ConfirmTransactionPin,
   CreateTransactionPin,
 } from "@src/screens/auth/transaction-pin";
+import Chat from "@src/screens/chat/Chat";
+import ChatScreen from "@src/screens/chat/ChatScreen";
 
 export const authScreen: authScreenTypes[] = [
   {
@@ -32,7 +34,7 @@ export const authScreen: authScreenTypes[] = [
   },
   {
     screenName: authScreenNames.ALREADY_HAVE_ACCT,
-    component: AlreadyHaveAcct,
+    component: ChatScreen,
   },
   {
     screenName: authScreenNames.FORGOT_PASSWORD,
@@ -65,5 +67,9 @@ export const authScreen: authScreenTypes[] = [
   {
     screenName: authScreenNames.CONFIRM_TRANSACTION_PIN,
     component: ConfirmTransactionPin,
+  },
+  {
+    screenName: authScreenNames.Chat,
+    component: Chat,
   },
 ];
