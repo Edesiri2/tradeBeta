@@ -14,3 +14,18 @@ export enum authScreenNames {
   CONFIRM_TRANSACTION_PIN = "ConfirmTransactionPin",
   Chat = "Chat",
 }
+
+export enum bottomTabScreenNames {
+  HOME = "Home",
+  CHAT = "Chat",
+  SETTINGS = "Settings",
+  TRANSACTION = "Transaction",
+}
+
+export enum appScreenNames {
+  BOTTOM_TAB = "BottomTab",
+  SEND_MONEY = "SendMoney",
+  TOP_UP = "TopUp",
+  WITH_DRAW = "WithDraw",
+  CHAT_MESSAGE = "ChatMessage",
+}

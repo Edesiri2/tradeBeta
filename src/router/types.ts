@@ -23,7 +23,10 @@ export type AuthScreenProps<ScreenName extends keyof AuthStackParamList> =
 
 //bottom tab-bar screen navigation
 export interface BottomTabBarStackParamList extends ParamListBase {
-  //put screen names here
+  Home: undefined;
+  Transaction: undefined;
+  Chat: undefined;
+  Settings: undefined;
 }
 
 export type BottomTabBarScreenProps<
@@ -32,7 +35,10 @@ export type BottomTabBarScreenProps<
 
 //native and app screen navigation
 export interface RootStackParamList extends ParamListBase {
-  //put app screen names here
+  ChatMessage: undefined;
+  SendMOney: undefined;
+  TopUp: undefined;
+  Withdraw: undefined;
 }
 
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =

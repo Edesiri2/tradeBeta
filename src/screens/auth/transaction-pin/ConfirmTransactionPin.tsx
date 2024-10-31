@@ -20,6 +20,7 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { Button } from "@src/components/shared/button";
+import { useAuthStore } from "@src/hooks/store";
 
 const dialPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, "del"];
 const pinLength = 4;
@@ -29,6 +30,7 @@ export const ConfirmTransactionPin = ({
   route,
 }: AuthScreenProps<authScreenNames.CREATE_TRANSACTION_PIN>) => {
   const [pinCode, setPinCode] = useState<any[]>([]);
+  const { setIsAuthenticated, isAuthenticated } = useAuthStore();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const transCode = route?.params;
   console.log(transCode);
@@ -172,7 +174,7 @@ export const ConfirmTransactionPin = ({
               }}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                navigation.navigate(authScreenNames.USER_CATEGORIES);
+                setIsAuthenticated(!isAuthenticated);
               }}
             />
           </View>

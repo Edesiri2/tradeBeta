@@ -39,9 +39,11 @@ import {
   individualCategoriesStep3FrmSchema,
 } from "@src/form/validation/rules";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useAuthStore } from "@src/hooks/store";
 
 export const IndividualCategories =
   ({}: AuthScreenProps<authScreenNames.INDIVIDUAL_CATEGORIES>) => {
+    const { setIsAuthenticated, isAuthenticated } = useAuthStore();
     const { activeStepIndex, submittedStepsIndex, nextStep, prevStep } =
       useStepper(individualKYCFrmSteps);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -201,6 +203,7 @@ export const IndividualCategories =
                 }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
+                  setIsAuthenticated(!isAuthenticated);
                 }}
               />
             </View>

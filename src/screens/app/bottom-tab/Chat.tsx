@@ -1,16 +1,20 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome as Icon } from "@expo/vector-icons";
+import { BottomTabBarScreenProps } from "@src/router/types";
+import { appScreenNames, bottomTabScreenNames } from "@src/navigation";
 
-const Chat: React.FC = () => {
+export const Chat = ({
+  navigation,
+}: BottomTabBarScreenProps<bottomTabScreenNames.CHAT>) => {
   return (
     <View style={styles.container}>
       {/* Top Header Section */}
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Chat</Text>
         <View style={styles.iconContainer}>
-          <Icon name="search" size={24} color="grey" style={styles.icon} />
-          <Icon name="filter" size={24} color="grey" />
+          <Icon name='search' size={24} color='grey' style={styles.icon} />
+          <Icon name='filter' size={24} color='grey' />
         </View>
       </View>
 
@@ -23,7 +27,11 @@ const Chat: React.FC = () => {
           Connect with your consultant by starting a new chat
         </Text>
 
-        <TouchableOpacity onPress={() => { }} style={styles.startChatButton}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(appScreenNames.CHAT_MESSAGE);
+          }}
+          style={styles.startChatButton}>
           <Text style={styles.startChatButtonText}>Start chat</Text>
         </TouchableOpacity>
 
@@ -114,5 +122,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default Chat;
