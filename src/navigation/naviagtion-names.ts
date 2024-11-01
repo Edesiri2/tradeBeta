@@ -13,6 +13,7 @@ export enum authScreenNames {
   CREATE_TRANSACTION_PIN = "CreateTransactionPin",
   CONFIRM_TRANSACTION_PIN = "ConfirmTransactionPin",
   Chat = "Chat",
+  Notification = "Notification",
 }
 
 export enum bottomTabScreenNames {
@@ -28,4 +29,6 @@ export enum appScreenNames {
   TOP_UP = "TopUp",
   WITH_DRAW = "WithDraw",
   CHAT_MESSAGE = "ChatMessage",
+  NOTIFICATION = "NOTIFICATION",
+  
 }

@@ -66,4 +66,5 @@ export const authScreen: authScreenTypes[] = [
     screenName: authScreenNames.ALREADY_HAVE_ACCT,
     component: AlreadyHaveAcct,
   },
+  
 ];
