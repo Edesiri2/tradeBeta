@@ -17,6 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import { RootStackScreenProps } from "@src/router/types";
 import { appScreenNames } from "@src/navigation";
+import { Screen } from "../Screen";
 
 export const ChatMessage =
   ({}: RootStackScreenProps<appScreenNames.CHAT_MESSAGE>) => {
@@ -88,6 +89,7 @@ export const ChatMessage =
     };
 
     return (
+      <Screen>
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
@@ -139,15 +141,19 @@ export const ChatMessage =
                 onChangeText={setText}
               />
               <TouchableOpacity
-                onPress={() =>
-                  onSend([
-                    {
-                      _id: Math.random().toString(),
-                      text,
-                      createdAt: new Date(),
-                      user: { _id: 1, name: "You" },
-                    },
-                  ])
+                onPress={() =>{
+                  if (text) {
+                    onSend([
+                      {
+                        _id: Math.random().toString(),
+                        text,
+                        createdAt: new Date(),
+                        user: { _id: 1, name: "You" },
+                      },
+                    ]);
+                  }
+                  setText("");
+                }
                 }>
                 <FontAwesome name='send' size={24} color='orange' />
               </TouchableOpacity>
@@ -155,6 +161,7 @@ export const ChatMessage =
           )}
         />
       </View>
+      </Screen>
     );
   };
 
