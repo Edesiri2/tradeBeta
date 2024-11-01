@@ -11,7 +11,7 @@ export const Router = () => {
     <>
       <NavigationContainer>
         <StatusBar style='dark' />
-        {isAuthenticated ? <AppStack /> : <AuthStack />}
+        {!isAuthenticated ? <AppStack /> : <AuthStack />}
       </NavigationContainer>
     </>
   );

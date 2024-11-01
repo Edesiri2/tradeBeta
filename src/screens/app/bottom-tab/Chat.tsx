@@ -35,7 +35,10 @@ export const Chat = ({
           <Text style={styles.startChatButtonText}>Start chat</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.faqButton}>
+        <TouchableOpacity style={styles.faqButton}
+         onPress={() => {
+          navigation.navigate(appScreenNames.NOTIFICATION);
+        }}>
           <Text style={styles.faqButtonText}>View FAQs</Text>
         </TouchableOpacity>
       </View>
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
   noChatText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#FF3B30", // Red color
+    color: "#FF3B30", 
     marginTop: 10,
   },
   subText: {
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   startChatButton: {
-    backgroundColor: "#FF3B30", // Red color
+    backgroundColor: "#FF3B30", 
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 25,
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   faqButton: {
-    borderColor: "#FF3B30", // Red color
+    borderColor: "#FF3B30", 
     borderWidth: 1,
     paddingVertical: 15,
     paddingHorizontal: 40,
