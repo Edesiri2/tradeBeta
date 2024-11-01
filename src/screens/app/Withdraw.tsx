@@ -3,12 +3,26 @@ import { Screen } from "../Screen";
 import { RegularText } from "@src/components/shared/text";
 import { RootStackScreenProps } from "@src/router/types";
 import { appScreenNames } from "@src/navigation";
+import { StyleSheet, Text, View } from "react-native";
 
 export const WithDraw =
   ({}: RootStackScreenProps<appScreenNames.WITH_DRAW>) => {
     return (
-      <Screen>
-        <RegularText>Withdraw</RegularText>
-      </Screen>
+      <View style={styles.container}>
+        <Text style={styles.h1}>Coming Soon</Text>
+      </View>
     );
   };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  h1: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "gray",
+  },
+});
