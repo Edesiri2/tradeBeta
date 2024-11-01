@@ -25,3 +25,7 @@ export const getIconComponent = async (iconFamily: string) => {
       throw new Error(`Unknown icon family: ${iconFamily}`);
   }
 };
+
+export const formatAmount = (price: number) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

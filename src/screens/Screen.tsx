@@ -8,12 +8,16 @@ type screenProps = {
   children: React.ReactNode;
   containerStyle?: ViewStyle;
   noSafeArea?: boolean;
+  bgColor?: string;
+  height?: any;
 };
 
 export const Screen: React.FC<screenProps> = ({
   children,
   containerStyle,
   noSafeArea,
+  bgColor,
+  height,
 }) => {
   return (
     <>
@@ -23,6 +27,9 @@ export const Screen: React.FC<screenProps> = ({
             styles.container2,
             {
               paddingHorizontal: moderateScale(-1),
+              backgroundColor: bgColor ? bgColor : colors.white,
+              width: "100%",
+              height: height ? height : "100%",
             },
           ]}>
           {children}
@@ -33,6 +40,8 @@ export const Screen: React.FC<screenProps> = ({
             styles.container,
             {
               paddingHorizontal: moderateScale(10),
+              backgroundColor: bgColor ? bgColor : colors.white,
+              height: height ? height : "100%",
             },
           ]}>
           {children}
@@ -43,13 +52,8 @@ export const Screen: React.FC<screenProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
+  container: {},
   container2: {
-    flex: 1,
-    backgroundColor: colors.white,
     paddingTop:
       Platform.OS === "android" ? StatusBar.currentHeight : verticalScale(30),
   },
