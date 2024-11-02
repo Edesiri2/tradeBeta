@@ -4,6 +4,11 @@ export type registrationFrmTypes = {
   referral_code: string;
 };
 
+export type addBankTypes = {
+  bank_name: string;
+  account_number: string;
+};
+
 export type customerFrmTypes = {
   email: string;
   password: string;

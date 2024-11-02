@@ -2,11 +2,19 @@ import { appScreenNames } from "@src/navigation";
 import { RootStackScreenProps } from "@src/router/types";
 import React from "react";
 import { Screen } from "../Screen";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import { addBankTypes } from "@src/form/schema/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { addBankSchema } from "@src/form/validation/rules";
 
 export const AddBank = ({
   navigation,
 }: RootStackScreenProps<appScreenNames.ADD_BANK>) => {
+    const { handleSubmit, control, formState: { errors } } = useForm<addBankTypes>({
+      mode: "onChange",
+      resolver: yupResolver(addBankSchema),  
+    })
   return (
     <Screen>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
@@ -34,7 +42,11 @@ export const AddBank = ({
         </Text>
 
         <View>
-            
+          {/* <Controller
+          control={control}
+          render={({ field }) => (
+              <
+          )} */}
         </View>
       </View>
 
