@@ -1,114 +1,126 @@
 import React from "react";
 import { BottomTabBarScreenProps } from "@src/router/types";
-import { bottomTabScreenNames } from "@src/navigation";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { appScreenNames, bottomTabScreenNames } from "@src/navigation";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
 import { SemiBoldText } from "@src/components/shared/text";
 
-export const Settings =
-  ({}: BottomTabBarScreenProps<bottomTabScreenNames.SETTINGS>) => {
-    return (
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.h3}>Profile Settings</Text>
-            <Icon name="edit" size={24} color="#252525" />
-          </View>
-          <View style={styles.userDetails}>
-            <View style={styles.img}></View>
-            <Text style={styles.h4}>Yemi Green</Text>
-            {/* <SemiBoldText sizeBody black>Yemi Green</SemiBoldText> */}
-            <Text>Yemi.green@gmail.com</Text>
-          </View>
+export const Settings = ({
+  navigation,
+}: BottomTabBarScreenProps<bottomTabScreenNames.SETTINGS>) => {
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.h3}>Profile Settings</Text>
+          <Icon name="edit" size={24} color="#252525" />
         </View>
-
-        <View style={styles.otherSettings}>
-          <View style={styles.container1}>
-            <Text style={styles.h3}>Other settings</Text>
-
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  My banks
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  Security
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                 Themes
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  Notifications
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  Help Center
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  Contact us
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-              <View style={styles.otherSettingsOptions}>
-                <View style={styles.icon}>
-                  <Icon name="lock" size={24} color="#ffffff" />
-                </View>
-                <SemiBoldText sizeBody black>
-                  Log out
-                </SemiBoldText>
-              </View>
-              <Icon name="chevron-right" size={24} color="#252525" />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.userDetails}>
+          <View style={styles.img}></View>
+          <Text style={styles.h4}>Yemi Green</Text>
+          {/* <SemiBoldText sizeBody black>Yemi Green</SemiBoldText> */}
+          <Text>Yemi.green@gmail.com</Text>
         </View>
-      </ScrollView>
-    );
-  };
+      </View>
+
+      <View style={styles.otherSettings}>
+        <View style={styles.container1}>
+          <Text style={styles.h3}>Other settings</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(appScreenNames.VIEW_BANK);
+            }}
+            style={styles.otherSettingsOptionsContainer}
+          >
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                My banks
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Security
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Themes
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Notifications
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Help Center
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Contact us
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <View style={styles.otherSettingsOptions}>
+              <View style={styles.icon}>
+                <Icon name="lock" size={24} color="#ffffff" />
+              </View>
+              <SemiBoldText sizeBody black>
+                Log out
+              </SemiBoldText>
+            </View>
+            <Icon name="chevron-right" size={24} color="#252525" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

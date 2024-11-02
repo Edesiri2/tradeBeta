@@ -10,7 +10,7 @@ export const Router = () => {
   return (
     <>
       <NavigationContainer>
-        <StatusBar style='dark' />
+        <StatusBar style="dark" />
         {!isAuthenticated ? <AppStack /> : <AuthStack />}
       </NavigationContainer>
     </>
