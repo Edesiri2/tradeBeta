@@ -39,6 +39,12 @@ export interface RootStackParamList extends ParamListBase {
   SendMOney: undefined;
   TopUp: undefined;
   Withdraw: undefined;
+  BankDetails: {
+    name: string;
+    accountNumber: string;
+    bankName: string;
+    status: boolean;
+  };
 }
 
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =

@@ -1,0 +1,25 @@
+export const nigeriaBanks = [
+    "Access Bank",
+    "Citibank",
+    "Ecobank Nigeria",
+    "Fidelity Bank",
+    "First Bank of Nigeria",
+    "First City Monument Bank (FCMB)",
+    "Globus Bank",
+    "Guaranty Trust Bank (GTBank)",
+    "Heritage Bank",
+    "Keystone Bank",
+    "Parallex Bank",
+    "Polaris Bank",
+    "Providus Bank",
+    "Stanbic IBTC Bank",
+    "Standard Chartered Bank",
+    "Sterling Bank",
+    "SunTrust Bank",
+    "Union Bank of Nigeria",
+    "United Bank for Africa (UBA)",
+    "Unity Bank",
+    "Wema Bank",
+    "Zenith Bank"
+  ];
+  

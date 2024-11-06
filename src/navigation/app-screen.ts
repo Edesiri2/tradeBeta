@@ -4,6 +4,7 @@ import { BottomTabStack } from "@src/router/bottom-tab-stack";
 import { ChatMessage, SendMoney, WithDraw } from "@src/screens/app";
 import { AddBank } from "@src/screens/app/AddBank";
 import { ViewBank } from "@src/screens/app/ViewBank";
+import { BankDetails } from "@src/screens/app/BankDetails";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -29,5 +30,9 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.VIEW_BANK,
     component: ViewBank,
+  },
+  {
+    screenName: appScreenNames.BANK_DETAILS,
+    component: BankDetails,
   },
 ];

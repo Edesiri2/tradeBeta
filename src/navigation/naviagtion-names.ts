@@ -32,4 +32,5 @@ export enum appScreenNames {
   NOTIFICATION = "NOTIFICATION",
   ADD_BANK = "AddBank",
   VIEW_BANK = "ViewBank",
+  BANK_DETAILS = "BankDetails",
 }
