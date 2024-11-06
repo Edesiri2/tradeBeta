@@ -35,4 +35,5 @@ export enum appScreenNames {
   BANK_DETAILS = "BankDetails",
   SECURITY = "Security",
   CHANGE_PASSWORD = "ChangePassword",
+  NEW_PASSWORD = "NewPassword",
 }

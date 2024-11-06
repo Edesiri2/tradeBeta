@@ -7,6 +7,7 @@ import { ViewBank } from "@src/screens/app/ViewBank";
 import { BankDetails } from "@src/screens/app/BankDetails";
 import { Security } from "@src/screens/app/Security";
 import { ChangePassword } from "@src/screens/app/ChangePassword";
+import { NewPassword } from "@src/screens/app/NewPassword";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -44,5 +45,9 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.CHANGE_PASSWORD,
     component: ChangePassword,
+  },
+  {
+    screenName: appScreenNames.NEW_PASSWORD,
+    component: NewPassword,
   },
 ];
