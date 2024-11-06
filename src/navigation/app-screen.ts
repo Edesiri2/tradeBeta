@@ -5,6 +5,8 @@ import { ChatMessage, SendMoney, WithDraw } from "@src/screens/app";
 import { AddBank } from "@src/screens/app/AddBank";
 import { ViewBank } from "@src/screens/app/ViewBank";
 import { BankDetails } from "@src/screens/app/BankDetails";
+import { Security } from "@src/screens/app/Security";
+import { ChangePassword } from "@src/screens/app/ChangePassword";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -34,5 +36,13 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.BANK_DETAILS,
     component: BankDetails,
+  },
+  {
+    screenName: appScreenNames.SECURITY,
+    component: Security,
+  },
+  {
+    screenName: appScreenNames.CHANGE_PASSWORD,
+    component: ChangePassword,
   },
 ];

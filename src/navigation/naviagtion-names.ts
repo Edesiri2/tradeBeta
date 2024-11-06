@@ -29,8 +29,10 @@ export enum appScreenNames {
   TOP_UP = "TopUp",
   WITH_DRAW = "WithDraw",
   CHAT_MESSAGE = "ChatMessage",
-  NOTIFICATION = "NOTIFICATION",
+  NOTIFICATION = "Notification",
   ADD_BANK = "AddBank",
   VIEW_BANK = "ViewBank",
   BANK_DETAILS = "BankDetails",
+  SECURITY = "Security",
+  CHANGE_PASSWORD = "ChangePassword",
 }
