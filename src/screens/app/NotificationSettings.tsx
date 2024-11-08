@@ -1,5 +1,4 @@
-import { appScreenNames } from "@src/navigation";
-import { RootStackScreenProps } from "@src/router/types";
+import React, { useState } from "react";
 import { Screen } from "../Screen";
 import {
   Image,
@@ -9,13 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SemiBoldText } from "@src/components/shared/text";
+import { RootStackScreenProps } from "@src/router/types";
+import { appScreenNames } from "@src/navigation";
 import { FontAwesome as Icon } from "@expo/vector-icons";
-import { useState } from "react";
+import { SemiBoldText } from "@src/components/shared/text";
 
-export const Security = ({
+export const NotificationSettings = ({
   navigation,
-}: RootStackScreenProps<appScreenNames.SECURITY>) => {
+}: RootStackScreenProps<appScreenNames.NOTIFICATION_SETTINGS>) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
@@ -28,36 +28,17 @@ export const Security = ({
         >
           <Image source={require("@src/assets/arrow-left.png")} />
         </TouchableOpacity>
-        <Text style={styles.h1}>Security</Text>
+        <Text style={styles.h1}>Notifications</Text>
       </View>
 
       <View style={{ marginTop: 41, gap: 11 }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate(appScreenNames.CHANGE_PASSWORD);
-          }}
-          style={styles.otherSettingsOptionsContainer}
-        >
+        <View style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
               <Icon name="lock" size={24} color="#ffffff" />
             </View>
             <SemiBoldText sizeBody black>
-              Change password
-            </SemiBoldText>
-          </View>
-          <Image source={require("@src/assets/arrow-right.png")} />
-        </TouchableOpacity>
-        <View
-          
-          style={styles.otherSettingsOptionsContainer}
-        >
-          <View style={styles.otherSettingsOptions}>
-            <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
-            </View>
-            <SemiBoldText sizeBody black>
-              Biometrics login
+              Transaction alert
             </SemiBoldText>
           </View>
           <Switch
@@ -79,7 +60,7 @@ export const Security = ({
               <Icon name="lock" size={24} color="#ffffff" />
             </View>
             <SemiBoldText sizeBody black>
-              Privacy policy
+              Updates
             </SemiBoldText>
           </View>
           <Image source={require("@src/assets/arrow-right.png")} />

@@ -76,7 +76,12 @@ export const Settings = ({
             </View>
             <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity> */}
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(appScreenNames.NOTIFICATION_SETTINGS)
+            }
+            style={styles.otherSettingsOptionsContainer}
+          >
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
                 <Icon name="lock" size={24} color="#ffffff" />
