@@ -9,6 +9,7 @@ import { Security } from "@src/screens/app/Security";
 import { ChangePassword } from "@src/screens/app/ChangePassword";
 import { NewPassword } from "@src/screens/app/NewPassword";
 import { NotificationSettings } from "@src/screens/app/NotificationSettings";
+import { EditProfile } from "@src/screens/app/EditProfile";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -54,5 +55,9 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.NOTIFICATION_SETTINGS,
     component: NotificationSettings,
+  },
+  {
+    screenName: appScreenNames.EDIT_PROFILE,
+    component: EditProfile,
   },
 ];

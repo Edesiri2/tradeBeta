@@ -21,7 +21,13 @@ export const Settings = ({
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.h3}>Profile Settings</Text>
-          <Icon name="edit" size={24} color="#252525" />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(appScreenNames.EDIT_PROFILE);
+            }}
+          >
+            <Icon name="edit" size={24} color="#252525" />
+          </TouchableOpacity>
         </View>
         <View style={styles.userDetails}>
           <View style={styles.img}></View>
@@ -136,6 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.main_light_color,
     paddingTop: 58,
     paddingHorizontal: 21,
+    paddingBottom: 54,
   },
   container1: {
     paddingVertical: 15,
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
   userDetails: {
     flexDirection: "column",
     alignItems: "center",
-    paddingBottom: 25,
+    paddingTop: 35,
   },
   img: {
     width: 64,
