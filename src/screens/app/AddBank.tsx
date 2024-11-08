@@ -1,9 +1,10 @@
 import { appScreenNames } from "@src/navigation";
 import { RootStackScreenProps } from "@src/router/types";
-import React from "react";
+import React, { useState } from "react";
 import { Screen } from "../Screen";
 import {
   Image,
+  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -16,9 +17,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addBankSchema } from "@src/form/validation/rules";
 import { TextInputs } from "@src/components/shared/input/Input";
 import { useSelectionModal } from "@src/common/hooks/useSelectionModal";
-import { screenWidth } from "@src/resources/scaling";
+import {
+  moderateScale,
+  screenHeight,
+  screenWidth,
+} from "@src/resources/scaling";
 import { SelectionModal } from "@src/common";
 import { nigeriaBanks } from "@src/contants/banks";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Button } from "@src/components/shared/button";
 
 export const AddBank = ({
   navigation,
@@ -29,6 +36,7 @@ export const AddBank = ({
     selectedModalValue,
     setSelectedModalValue,
   } = useSelectionModal();
+  const [showModal, setShowModal] = useState<boolean>(false);
   const {
     setValue,
     handleSubmit,
@@ -110,7 +118,7 @@ export const AddBank = ({
         <TouchableOpacity
           style={styles.addBtn}
           onPress={() => {
-            //   navigation.navigate(appScreenNames.ADD_BANK);
+            setShowModal(!showModal);
           }}
         >
           <Text
@@ -154,6 +162,44 @@ export const AddBank = ({
           />
         </View>
       )}
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={() => {
+          setShowModal(false);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name="check-circle-outline"
+              size={100}
+              color="green"
+            />
+            <View style={{ marginVertical: moderateScale(20) }}>
+              <Text style={styles.modalTitle}>Bank Added Successfully!</Text>
+              <Text style={styles.modalMessage}>
+                A new bank account has been added for your withdrawals
+              </Text>
+            </View>
+            <Button
+              title="Continue"
+              bgMainColor
+              sizeBody
+              textWhite
+              style={{
+                width: "100%",
+              }}
+              onPress={() => {
+                setShowModal(!showModal);
+                navigation.navigate(appScreenNames.VIEW_BANK);
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
@@ -177,5 +223,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 48,
     borderRadius: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    height: screenHeight / 2,
+    backgroundColor: "white",
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: "center",
+  },
+
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#ff4500",
+    textAlign: "center",
+  },
+  modalMessage: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
   },
 });

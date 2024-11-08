@@ -1,13 +1,23 @@
 import { appScreenNames } from "@src/navigation";
 import { RootStackScreenProps } from "@src/router/types";
 import { Screen } from "../Screen";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SemiBoldText } from "@src/components/shared/text";
 import { FontAwesome as Icon } from "@expo/vector-icons";
+import { useState } from "react";
 
 export const Security = ({
   navigation,
 }: RootStackScreenProps<appScreenNames.SECURITY>) => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <Screen>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
@@ -38,10 +48,8 @@ export const Security = ({
           </View>
           <Image source={require("@src/assets/arrow-right.png")} />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate(appScreenNames.VIEW_BANK);
-          }}
+        <View
+          
           style={styles.otherSettingsOptionsContainer}
         >
           <View style={styles.otherSettingsOptions}>
@@ -52,11 +60,17 @@ export const Security = ({
               Biometrics login
             </SemiBoldText>
           </View>
-          <Image source={require("@src/assets/arrow-right.png")} />
-        </TouchableOpacity>
+          <Switch
+            trackColor={{ false: "#E0E0E0", true: "#E0E0E0" }}
+            thumbColor={isEnabled ? "#f4f3f4" : "#DB3A09"}
+            ios_backgroundColor="#f4f3f4"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(appScreenNames.VIEW_BANK);
+            // navigation.navigate(appScreenNames.VIEW_BANK);
           }}
           style={styles.otherSettingsOptionsContainer}
         >
