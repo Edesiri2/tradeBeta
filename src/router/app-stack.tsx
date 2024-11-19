@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./types";
 import { appScreen } from "@src/navigation";
+import React from "react";
 
 const ScreenStack = createNativeStackNavigator<RootStackParamList>();
 const headerOptions: NativeStackNavigationOptions = { headerShown: false };

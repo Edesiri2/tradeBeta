@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "plugins": [
       [
         "expo-camera",
@@ -24,7 +25,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
