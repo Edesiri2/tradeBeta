@@ -39,4 +39,5 @@ export enum appScreenNames {
   NOTIFICATION_SETTINGS = "NotificationSettings",
   EDIT_PROFILE = "EditProfile",
   TRANSACTION_DETAILS = "TransactionDetails",
+  ALL_TRANSACTIONS = "AllTransactions",
 }

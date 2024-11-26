@@ -216,7 +216,6 @@ export default function TransactionDetails({
               Successful
             </Text>
           </View>
-          
         </View>
       </View>
     </View>

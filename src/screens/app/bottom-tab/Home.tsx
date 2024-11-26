@@ -147,8 +147,10 @@ export const Home = ({
           <BoldText sizeBody textStyle={styles.textColor}>
             Recent Transaction
           </BoldText>
-          <TouchableOpacity>
-            <SemiBoldText sizeBody textStyle={styles.textColor}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(appScreenNames.ALL_TRANSACTIONS)}
+          >
+            <SemiBoldText sizeSmall textStyle={styles.textColor}>
               View All
             </SemiBoldText>
           </TouchableOpacity>

@@ -56,7 +56,63 @@ export const Transaction = ({
         </View>
       </View>
       <View style={styles.container2}>
-        <Text style={styles.h3}>Transaction History</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text style={styles.h3}>Transaction History</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(appScreenNames.ALL_TRANSACTIONS)}
+          >
+            <Text style={styles.p}>View all</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: 12,
+            marginTop: 20,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderColor: "#252525",
+              paddingVertical: 8,
+              paddingHorizontal: 12,
+              borderRadius: 16,
+            }}
+          >
+            <Text style={styles.text}>Money Sent</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderColor: "#252525",
+              paddingVertical: 8,
+              paddingHorizontal: 12,
+              borderRadius: 16,
+            }}
+          >
+            <Text style={styles.text}>Top Ups</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderColor: "#252525",
+              paddingVertical: 8,
+              paddingHorizontal: 12,
+              borderRadius: 16,
+            }}
+          >
+            <Text style={styles.text}>Withdrawn</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <ScrollView style={styles.otherSettings}>
         <View style={styles.container1}>
@@ -148,6 +204,18 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: "bold",
     color: "gray",
+  },
+  p: {
+    fontSize: 13,
+    lineHeight: 19.5,
+    fontWeight: "700",
+    color: "#252525",
+  },
+  text: {
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: "400",
+    color: "#252525",
   },
   header: {
     flexDirection: "row",

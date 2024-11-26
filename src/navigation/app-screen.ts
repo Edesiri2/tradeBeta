@@ -11,6 +11,7 @@ import { NewPassword } from "@src/screens/app/NewPassword";
 import { NotificationSettings } from "@src/screens/app/NotificationSettings";
 import { EditProfile } from "@src/screens/app/EditProfile";
 import TransactionDetails from "@src/screens/app/TransactionDetails";
+import AllTransactions from "@src/screens/app/AllTransactions";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -64,5 +65,9 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.TRANSACTION_DETAILS,
     component: TransactionDetails,
+  },
+  {
+    screenName: appScreenNames.ALL_TRANSACTIONS,
+    component: AllTransactions,
   },
 ];
