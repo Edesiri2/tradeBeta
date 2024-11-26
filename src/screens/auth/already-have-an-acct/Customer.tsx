@@ -38,6 +38,7 @@ export const Customer = () => {
     if (data) {
       console.log(data);
       setIsAuthenticated(true);
+      navigation.navigate(bottomTabScreenNames.HOME);
     }
   };
   return (

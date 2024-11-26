@@ -10,6 +10,7 @@ import { ChangePassword } from "@src/screens/app/ChangePassword";
 import { NewPassword } from "@src/screens/app/NewPassword";
 import { NotificationSettings } from "@src/screens/app/NotificationSettings";
 import { EditProfile } from "@src/screens/app/EditProfile";
+import TransactionDetails from "@src/screens/app/TransactionDetails";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -59,5 +60,9 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.EDIT_PROFILE,
     component: EditProfile,
+  },
+  {
+    screenName: appScreenNames.TRANSACTION_DETAILS,
+    component: TransactionDetails,
   },
 ];

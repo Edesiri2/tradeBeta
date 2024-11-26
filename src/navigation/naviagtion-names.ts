@@ -38,4 +38,5 @@ export enum appScreenNames {
   NEW_PASSWORD = "NewPassword",
   NOTIFICATION_SETTINGS = "NotificationSettings",
   EDIT_PROFILE = "EditProfile",
+  TRANSACTION_DETAILS = "TransactionDetails",
 }

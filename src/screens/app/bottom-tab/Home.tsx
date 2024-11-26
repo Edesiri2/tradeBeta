@@ -28,13 +28,15 @@ export const Home = ({
 }: BottomTabBarScreenProps<bottomTabScreenNames.HOME>) => {
   return (
     <View style={styles.container}>
-      <Screen bgColor='transparent' height={"60%"}>
+      <View
+        style={{ paddingHorizontal: 20, paddingTop: 60, paddingBottom: 20 }}
+      >
         <View style={styles.header}>
           <View style={styles.imgContainer}>
             <Image
               source={require("@src/assets/home-user.png")}
               style={styles.image}
-              resizeMode='contain'
+              resizeMode="contain"
             />
             <BoldText sizeBody textStyle={styles.textColor}>
               Hi, Yemi
@@ -42,11 +44,11 @@ export const Home = ({
           </View>
           <View style={styles.headerActionBtn}>
             <TouchableOpacity>
-              <Ionicons name='eye' color={"#252525"} size={moderateScale(20)} />
+              <Ionicons name="eye" color={"#252525"} size={moderateScale(20)} />
             </TouchableOpacity>
             <TouchableOpacity>
               <Ionicons
-                name='notifications'
+                name="notifications"
                 color={"#252525"}
                 size={moderateScale(20)}
               />
@@ -57,7 +59,8 @@ export const Home = ({
           <View
             style={{
               flexDirection: "row",
-            }}>
+            }}
+          >
             <BoldText sizeMedium textStyle={styles.textColor}>
               ¥
             </BoldText>
@@ -68,7 +71,7 @@ export const Home = ({
           <SemiBoldText sizeSmall>Available Wallet balance</SemiBoldText>
           <View style={styles.btnContainer}>
             <Button
-              title='Send'
+              title="Send"
               textWhite
               sizeBody
               bgMainColor
@@ -80,14 +83,14 @@ export const Home = ({
               }}
               leftIcon={
                 <FontAwesome
-                  name='send'
+                  name="send"
                   color={colors.white}
                   size={moderateScale(15)}
                 />
               }
             />
             <Button
-              title='Withdraw'
+              title="Withdraw"
               textWhite
               sizeBody
               style={{
@@ -99,7 +102,7 @@ export const Home = ({
               }}
               leftIcon={
                 <Feather
-                  name='download'
+                  name="download"
                   color={colors.white}
                   size={moderateScale(15)}
                 />
@@ -138,8 +141,8 @@ export const Home = ({
               </View>
             ))}
         </View>
-      </Screen>
-      <Screen height={"50%"}>
+      </View>
+      <View style={{ paddingHorizontal: 20, backgroundColor: "#fff" }}>
         <View style={styles.recentTransHeader}>
           <BoldText sizeBody textStyle={styles.textColor}>
             Recent Transaction
@@ -158,11 +161,14 @@ export const Home = ({
             marginBottom: DVH(10),
           }}
           renderItem={({ item, index }) => (
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("TransactionDetails")}
+              style={styles.btn}
+            >
               <View style={styles.detailContainer}>
                 <View style={styles.transactionIcon}>
                   <MaterialCommunityIcons
-                    name='finance'
+                    name="finance"
                     size={moderateScale(20)}
                     color={colors.white}
                   />
@@ -183,7 +189,8 @@ export const Home = ({
                     item.transType === "send"
                       ? colors.dark_green
                       : colors.main_color,
-                }}>
+                }}
+              >
                 {item.transType === "send" ? "-" : "+"}
                 {item.amount}
               </BoldText>
@@ -201,7 +208,7 @@ export const Home = ({
             paddingVertical: moderateScale(18),
           }}
         />
-      </Screen>
+      </View>
     </View>
   );
 };
@@ -268,7 +275,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: moderateScale(-20),
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(10),
   },
   transactionIcon: {
     width: DVW(10),

@@ -1,133 +1,123 @@
 import React from "react";
 import { Screen } from "../../Screen";
-import { RegularText, SemiBoldText } from "@src/components/shared/text";
+import {
+  BoldText,
+  LightText,
+  RegularText,
+  SemiBoldText,
+} from "@src/components/shared/text";
 import { BottomTabBarScreenProps } from "@src/router/types";
 import { appScreenNames, bottomTabScreenNames } from "@src/navigation";
-import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { colors } from "@src/resources/colors";
-import { FontAwesome as Icon } from "@expo/vector-icons";
+import {
+  FontAwesome as Icon,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { DVH, DVW, moderateScale } from "@src/resources/scaling";
+import { recentTransaction } from "@src/contants/home";
 
 export const Transaction = ({
   navigation,
 }: BottomTabBarScreenProps<bottomTabScreenNames.TRANSACTION>) => {
   return (
-    <ScrollView>
+    <View>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.h3}>Profile Settings</Text>
+          <Text style={styles.h3}>Tansactions</Text>
           <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(appScreenNames.EDIT_PROFILE);
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 4,
+              justifyContent: "center",
+              borderWidth: 1,
+              borderColor: "#383838",
+              padding: 10,
+              borderRadius: 10,
             }}
           >
-            <Icon name="edit" size={24} color="#252525" />
+            <Icon name="clock-o" size={16} color="#252525" />
+            <Text style={{ fontSize: 10 }}>Last 30 days</Text>
+            <Icon name="chevron-down" size={16} color="#252525" />
           </TouchableOpacity>
         </View>
+        {/* Chart */}
         <View style={styles.userDetails}>
-          <View style={styles.img}></View>
-          <Text style={styles.h4}>Yemi Green</Text>
-          {/* <SemiBoldText sizeBody black>Yemi Green</SemiBoldText> */}
-          <Text>Yemi.green@gmail.com</Text>
+          <Text style={styles.h4}>No Transactions yet</Text>
         </View>
       </View>
-
-      <View style={styles.otherSettings}>
+      <View style={styles.container2}>
+        <Text style={styles.h3}>Transaction History</Text>
+      </View>
+      <ScrollView style={styles.otherSettings}>
         <View style={styles.container1}>
-          <Text style={styles.h3}>Other settings</Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(appScreenNames.VIEW_BANK);
+          <FlatList
+            data={recentTransaction}
+            keyExtractor={(items) => items.id.toString()}
+            contentContainerStyle={{
+              flexGrow: 1,
+              marginBottom: DVH(10),
             }}
-            style={styles.otherSettingsOptionsContainer}
-          >
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                My banks
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(appScreenNames.SECURITY)}
-            style={styles.otherSettingsOptionsContainer}
-          >
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Security
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Themes
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity> */}
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(appScreenNames.NOTIFICATION_SETTINGS)
-            }
-            style={styles.otherSettingsOptionsContainer}
-          >
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Notifications
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Help Center
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Contact us
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
-            <View style={styles.otherSettingsOptions}>
-              <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
-              </View>
-              <SemiBoldText sizeBody black>
-                Log out
-              </SemiBoldText>
-            </View>
-            <Image source={require("@src/assets/arrow-right.png")} />
-          </TouchableOpacity>
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("TransactionDetails")}
+                style={styles.btn}
+              >
+                <View style={styles.detailContainer}>
+                  <View style={styles.transactionIcon}>
+                    <MaterialCommunityIcons
+                      name="finance"
+                      size={moderateScale(20)}
+                      color={colors.white}
+                    />
+                  </View>
+                  <View>
+                    <BoldText textStyle={styles.textColor}>
+                      {item.detail}
+                    </BoldText>
+                    <View style={styles.dateTimeContainer}>
+                      <LightText>{item.time} •</LightText>
+                      <LightText>{item.date}</LightText>
+                    </View>
+                  </View>
+                </View>
+                <BoldText
+                  textStyle={{
+                    color:
+                      item.transType === "send"
+                        ? colors.dark_green
+                        : colors.main_color,
+                  }}
+                >
+                  {item.transType === "send" ? "-" : "+"}
+                  {item.amount}
+                </BoldText>
+              </TouchableOpacity>
+            )}
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            maxToRenderPerBatch={2}
+            initialNumToRender={2}
+            windowSize={2}
+            updateCellsBatchingPeriod={100}
+          />
+          <View
+            style={{
+              paddingVertical: moderateScale(18),
+            }}
+          />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -139,11 +129,16 @@ const styles = StyleSheet.create({
     paddingBottom: 54,
   },
   container1: {
-    paddingVertical: 15,
+    paddingVertical: 5,
     paddingHorizontal: 21,
   },
+  container2: {
+    paddingVertical: 15,
+    paddingHorizontal: 21,
+    backgroundColor: "#FFFFFF",
+  },
   h3: {
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 30,
     fontWeight: "bold",
     color: "#252525",
@@ -152,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontWeight: "bold",
-    color: "#252525",
+    color: "gray",
   },
   header: {
     flexDirection: "row",
@@ -195,6 +190,32 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     justifyContent: "center",
+    alignItems: "center",
+  },
+  btn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: moderateScale(10),
+  },
+  detailContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: moderateScale(10),
+  },
+  transactionIcon: {
+    width: DVW(10),
+    height: DVH(9) / 2,
+    borderRadius: DVW(15) / 2,
+    backgroundColor: colors.main_color,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textColor: {
+    color: "#252525",
+  },
+  dateTimeContainer: {
+    flexDirection: "row",
     alignItems: "center",
   },
 });
