@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
@@ -20,7 +21,13 @@ export const Settings = ({
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.h3}>Profile Settings</Text>
-          <Icon name="edit" size={24} color="#252525" />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(appScreenNames.EDIT_PROFILE);
+            }}
+          >
+            <Icon name="edit" size={24} color="#252525" />
+          </TouchableOpacity>
         </View>
         <View style={styles.userDetails}>
           <View style={styles.img}></View>
@@ -48,9 +55,12 @@ export const Settings = ({
                 My banks
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(appScreenNames.SECURITY)}
+            style={styles.otherSettingsOptionsContainer}
+          >
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
                 <Icon name="lock" size={24} color="#ffffff" />
@@ -59,9 +69,9 @@ export const Settings = ({
                 Security
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+          {/* <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
                 <Icon name="lock" size={24} color="#ffffff" />
@@ -70,9 +80,14 @@ export const Settings = ({
                 Themes
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
+            <Image source={require("@src/assets/arrow-right.png")} />
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(appScreenNames.NOTIFICATION_SETTINGS)
+            }
+            style={styles.otherSettingsOptionsContainer}
+          >
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
                 <Icon name="lock" size={24} color="#ffffff" />
@@ -81,7 +96,7 @@ export const Settings = ({
                 Notifications
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
@@ -92,7 +107,7 @@ export const Settings = ({
                 Help Center
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
@@ -103,7 +118,7 @@ export const Settings = ({
                 Contact us
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
@@ -114,7 +129,7 @@ export const Settings = ({
                 Log out
               </SemiBoldText>
             </View>
-            <Icon name="chevron-right" size={24} color="#252525" />
+            <Image source={require("@src/assets/arrow-right.png")} />
           </TouchableOpacity>
         </View>
       </View>
@@ -127,6 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.main_light_color,
     paddingTop: 58,
     paddingHorizontal: 21,
+    paddingBottom: 54,
   },
   container1: {
     paddingVertical: 15,
@@ -153,7 +169,7 @@ const styles = StyleSheet.create({
   userDetails: {
     flexDirection: "column",
     alignItems: "center",
-    paddingBottom: 25,
+    paddingTop: 35,
   },
   img: {
     width: 64,

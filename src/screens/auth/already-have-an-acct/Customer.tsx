@@ -14,9 +14,15 @@ import { Entypo } from "@expo/vector-icons";
 import { ScrollContainer } from "@src/screens/Scroll-Container";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { AuthStackParamList } from "@src/router/types";
-import { authScreenNames } from "@src/navigation/naviagtion-names";
+import {
+  appScreenNames,
+  authScreenNames,
+  bottomTabScreenNames,
+} from "@src/navigation/naviagtion-names";
+import { useAuthStore } from "@src/hooks/store";
 
 export const Customer = () => {
+  const { setIsAuthenticated } = useAuthStore();
   const [isChecked, setChecked] = useState<boolean>(false);
   const navigation: NavigationProp<AuthStackParamList> = useNavigation();
   const {
@@ -31,6 +37,8 @@ export const Customer = () => {
   const onSubmit = (data: customerFrmTypes) => {
     if (data) {
       console.log(data);
+      setIsAuthenticated(true);
+      navigation.navigate(bottomTabScreenNames.HOME);
     }
   };
   return (
@@ -47,27 +55,27 @@ export const Customer = () => {
         control={control}
         render={({ field }) => (
           <TextInputs
-            label='Email'
-            placeholder='a@example.com'
-            iconName='mail'
-            iconFamily='Entypo'
+            label="Email"
+            placeholder="a@example.com"
+            iconName="mail"
+            iconFamily="Entypo"
             error={errors?.email?.message}
             value={field.value}
             onChangeText={(value) => field.onChange(value)}
             showErrorText
           />
         )}
-        name='email'
-        defaultValue=''
+        name="email"
+        defaultValue=""
       />
       <Controller
         control={control}
         render={({ field }) => (
           <TextInputs
-            label='Password'
-            placeholder='******'
-            iconName='lock'
-            iconFamily='FontAwesome'
+            label="Password"
+            placeholder="******"
+            iconName="lock"
+            iconFamily="FontAwesome"
             passwordInput
             value={field.value}
             onChangeText={(value) => field.onChange(value)}
@@ -75,8 +83,8 @@ export const Customer = () => {
             showErrorText
           />
         )}
-        name='password'
-        defaultValue=''
+        name="password"
+        defaultValue=""
       />
       <View style={styles.checkContainer}>
         <View style={styles.checkboxContainer}>
@@ -93,14 +101,15 @@ export const Customer = () => {
           </LightText>
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate(authScreenNames.FORGOT_PASSWORD)}>
+          onPress={() => navigation.navigate(authScreenNames.FORGOT_PASSWORD)}
+        >
           <BoldText mainColor sizeBody>
             Forgot Password
           </BoldText>
         </TouchableOpacity>
       </View>
       <Button
-        title='Sign in'
+        title="Sign in"
         bgMainColor
         textWhite
         sizeBody
@@ -111,7 +120,7 @@ export const Customer = () => {
       />
       <TouchableOpacity style={styles.biometricBtn}>
         <Entypo
-          name='fingerprint'
+          name="fingerprint"
           color={colors.darkGray}
           size={moderateScale(20)}
         />
@@ -120,14 +129,11 @@ export const Customer = () => {
         </LightText>
       </TouchableOpacity>
       <View style={styles.dontHaveAcctContainer}>
-        <LightText sizeBody black>
-          Set up biometrics login
-        </LightText>
         <ButtonOutline
           borderMainColor
           textBlack
           sizeBody
-          title='Register'
+          title="Register"
           style={{
             width: "100%",
           }}

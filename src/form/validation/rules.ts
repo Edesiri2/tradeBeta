@@ -12,6 +12,14 @@ export const registrationFrmSchema = yup.object().shape({
   referral_code: yup.string().required("referral code is required"),
 });
 
+export const addBankSchema = yup.object().shape({
+  bank_name: yup.string().required("bank name is required"),
+  account_number: yup
+    .string()
+    .required("account number is required")
+    .matches(/^[0-9]+$/, "field must be number only"),
+})
+
 export const customerFrmSchema = yup.object().shape({
   email: yup
     .string()

@@ -6,6 +6,8 @@ export const getIconComponent = async (iconFamily: string) => {
       return (await import("@expo/vector-icons")).FontAwesome;
     case "FontAwesome5":
       return (await import("@expo/vector-icons")).FontAwesome5;
+    case "FontAwesome6":
+      return (await import("@expo/vector-icons")).FontAwesome6;
     case "MaterialIcons":
       return (await import("@expo/vector-icons")).MaterialIcons;
     case "Entypo":
