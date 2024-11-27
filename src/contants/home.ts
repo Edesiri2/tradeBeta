@@ -108,28 +108,5 @@ export const recentTransaction = [
     transType: "send",
     amount: 10.0,
   },
-  {
-    id: 13,
-    detail: "Bill Payment",
-    time: "9:30am",
-    date: "16 Jan",
-    transType: "send",
-    amount: 15.25,
-  },
-  {
-    id: 14,
-    detail: "Withdrawn",
-    time: "5:15pm",
-    date: "16 Jan",
-    transType: "receive",
-    amount: 100.0,
-  },
-  {
-    id: 15,
-    detail: "Money Sent",
-    time: "6:00pm",
-    date: "16 Jan",
-    transType: "send",
-    amount: 75.5,
-  },
+  
 ];
