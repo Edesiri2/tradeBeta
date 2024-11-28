@@ -29,10 +29,9 @@ export default function AllTransactions({
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <MaterialIcons
-            name="arrow-back-ios"
+            name='arrow-back-ios'
             size={moderateScale(20)}
             color={colors.black}
           />
@@ -41,77 +40,78 @@ export default function AllTransactions({
           Transaction Details
         </BoldText>
       </View>
-      <ScrollView style={styles.otherSettings}>
-        <View style={styles.container1}>
-          <FlatList
-            data={recentTransaction}
-            keyExtractor={(items) => items.id.toString()}
-            contentContainerStyle={{
-              flexGrow: 1,
-              marginBottom: DVH(10),
-            }}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("TransactionDetails")}
-                style={styles.btn}
-              >
-                <View style={styles.detailContainer}>
-                  <View style={styles.transactionIcon}>
-                    <MaterialCommunityIcons
-                      name="finance"
-                      size={moderateScale(20)}
-                      color={colors.white}
-                    />
-                  </View>
-                  <View>
-                    <BoldText textStyle={styles.textColor}>
-                      {item.detail}
-                    </BoldText>
-                    <View style={styles.dateTimeContainer}>
-                      <LightText>{item.time} •</LightText>
-                      <LightText>{item.date}</LightText>
-                    </View>
+      {/* <ScrollView style={styles.otherSettings}> */}
+      <View style={styles.container1}>
+        <FlatList
+          data={recentTransaction}
+          keyExtractor={(items) => items.id.toString()}
+          contentContainerStyle={{
+            flexGrow: 1,
+            marginBottom: DVH(10),
+          }}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                navigation.navigate(appScreenNames.TRANSACTION_DETAILS)
+              }
+              style={styles.btn}>
+              <View style={styles.detailContainer}>
+                <View style={styles.transactionIcon}>
+                  <MaterialCommunityIcons
+                    name='finance'
+                    size={moderateScale(20)}
+                    color={colors.white}
+                  />
+                </View>
+                <View>
+                  <BoldText textStyle={styles.textColor}>
+                    {item.detail}
+                  </BoldText>
+                  <View style={styles.dateTimeContainer}>
+                    <LightText>{item.time} •</LightText>
+                    <LightText>{item.date}</LightText>
                   </View>
                 </View>
-                <BoldText
-                  textStyle={{
-                    color:
-                      item.transType === "send"
-                        ? colors.dark_green
-                        : colors.main_color,
-                  }}
-                >
-                  {item.transType === "send" ? "-" : "+"}
-                  {item.amount}
-                </BoldText>
-              </TouchableOpacity>
-            )}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-            maxToRenderPerBatch={2}
-            initialNumToRender={2}
-            windowSize={2}
-            updateCellsBatchingPeriod={100}
-          />
-          <View
-            style={{
-              paddingVertical: moderateScale(18),
-            }}
-          />
-        </View>
-      </ScrollView>
+              </View>
+              <BoldText
+                textStyle={{
+                  color:
+                    item.transType === "send"
+                      ? colors.dark_green
+                      : colors.main_color,
+                }}>
+                {item.transType === "send" ? "-" : "+"}
+                {item.amount}
+              </BoldText>
+            </TouchableOpacity>
+          )}
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+          maxToRenderPerBatch={2}
+          initialNumToRender={2}
+          windowSize={2}
+          updateCellsBatchingPeriod={100}
+        />
+        <View
+          style={{
+            paddingVertical: moderateScale(18),
+          }}
+        />
+      </View>
+      {/* </ScrollView> */}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container1: {
-    paddingVertical: 21,
+    paddingVertical: moderateScale(21),
     // paddingHorizontal: 21,
   },
   container2: {
-    paddingVertical: 15,
-    paddingHorizontal: 21,
+    paddingVertical: moderateScale(15),
+    paddingHorizontal: moderateScale(21),
     backgroundColor: "#FFFFFF",
   },
   header: {

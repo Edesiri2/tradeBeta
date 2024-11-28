@@ -15,7 +15,7 @@ import { Controller, useForm } from "react-hook-form";
 import { TextInputs } from "@src/components/shared/input/Input";
 import { addBankTypes } from "@src/form/schema/types";
 import { Button } from "@src/components/shared/button";
-import { moderateScale, screenHeight } from "@src/resources/scaling";
+import { DVW, moderateScale, screenHeight } from "@src/resources/scaling";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const NewPassword = ({
@@ -38,8 +38,7 @@ export const NewPassword = ({
           <TouchableOpacity
             onPress={() => {
               navigation.goBack();
-            }}
-          >
+            }}>
             <Image source={require("@src/assets/arrow-left.png")} />
           </TouchableOpacity>
           <Text style={styles.h1}>Change Password</Text>
@@ -48,8 +47,7 @@ export const NewPassword = ({
         <View style={{ marginTop: 41, gap: 64, flex: 1 }}>
           <View style={{ gap: 8 }}>
             <Text
-              style={{ fontSize: 24, fontWeight: "bold", lineHeight: 28.8 }}
-            >
+              style={{ fontSize: 24, fontWeight: "bold", lineHeight: 28.8 }}>
               Set a new password
             </Text>
             <Text style={{ fontSize: 16, fontWeight: "400", lineHeight: 24 }}>
@@ -57,90 +55,93 @@ export const NewPassword = ({
             </Text>
           </View>
           <View>
-            <View style={{ width: 350 }}>
-              <Controller
-                control={control}
-                name="account_number"
-                defaultValue=""
-                render={({ field }) => (
-                  <TextInputs
-                    label="New Password"
-                    placeholder="********"
-                    iconName="lock"
-                    iconFamily="Entypo"
-                    error={errors?.account_number?.message}
-                    value={field.value}
-                    onChangeText={(value) => field.onChange(value)}
-                    showErrorText
-                  />
-                )}
-              />
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontWeight: "400",
-                  lineHeight: 19.5,
-                  color: "#252525",
-                  marginTop: -15,
-                }}
-              >
-                Must 8 characters at least and co.
-              </Text>
-            </View>
-            <View style={{ width: 350, marginTop: 16 }}>
-              <Controller
-                control={control}
-                name="account_number"
-                defaultValue=""
-                render={({ field }) => (
-                  <TextInputs
-                    label="Confirm Password"
-                    placeholder="********"
-                    iconName="lock"
-                    iconFamily="Entypo"
-                    error={errors?.account_number?.message}
-                    value={field.value}
-                    onChangeText={(value) => field.onChange(value)}
-                    showErrorText
-                  />
-                )}
-              />
-            </View>
+            {/* <View style={{ width: 350 }}> */}
+            <Controller
+              control={control}
+              name='account_number'
+              defaultValue=''
+              render={({ field }) => (
+                <TextInputs
+                  label='New Password'
+                  placeholder='********'
+                  iconName='lock'
+                  iconFamily='Entypo'
+                  error={errors?.account_number?.message}
+                  value={field.value}
+                  onChangeText={(value) => field.onChange(value)}
+                  showErrorText
+                  inputStyle={{
+                    width: DVW(94),
+                  }}
+                />
+              )}
+            />
+            <Text
+              style={{
+                fontSize: 13,
+                fontWeight: "400",
+                lineHeight: 19.5,
+                color: "#252525",
+                marginTop: -15,
+                marginBottom: moderateScale(15),
+              }}>
+              Must 8 characters at least and co.
+            </Text>
+            {/* </View> */}
+            {/* <View style={{marginTop: 16 }}> */}
+            <Controller
+              control={control}
+              name='account_number'
+              defaultValue=''
+              render={({ field }) => (
+                <TextInputs
+                  label='Confirm Password'
+                  placeholder='********'
+                  iconName='lock'
+                  iconFamily='Entypo'
+                  error={errors?.account_number?.message}
+                  value={field.value}
+                  onChangeText={(value) => field.onChange(value)}
+                  showErrorText
+                  inputStyle={{
+                    width: DVW(94),
+                  }}
+                />
+              )}
+            />
+            {/* </View> */}
           </View>
         </View>
         <TouchableOpacity
           style={styles.addBtn}
           onPress={() => {
             setShowModal(!showModal);
-          }}
-        >
+          }}>
           <Text
             style={{
               color: "#fff",
               fontWeight: "bold",
               fontSize: 16,
               lineHeight: 24,
-            }}
-          >
+            }}>
             Update password
           </Text>
         </TouchableOpacity>
       </Screen>
 
       <Modal
-        animationType="slide"
+        animationType='slide'
         transparent={true}
         visible={showModal}
         onRequestClose={() => {
           setShowModal(false);
-        }}
-      >
+        }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <MaterialIcons
-              name="check-circle-outline"
+              name='check-circle-outline'
               size={100}
-              color="green"
+              color='green'
             />
             <View style={{ marginVertical: moderateScale(20) }}>
               <Text style={styles.modalTitle}>Password Change Successful!</Text>
@@ -150,7 +151,7 @@ export const NewPassword = ({
               </Text>
             </View>
             <Button
-              title="Update"
+              title='Update'
               bgMainColor
               sizeBody
               textWhite

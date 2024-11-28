@@ -12,6 +12,7 @@ import { RootStackScreenProps } from "@src/router/types";
 import { appScreenNames } from "@src/navigation";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { SemiBoldText } from "@src/components/shared/text";
+import { moderateScale } from "@src/resources/scaling";
 
 export const NotificationSettings = ({
   navigation,
@@ -20,22 +21,26 @@ export const NotificationSettings = ({
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <Screen>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: moderateScale(16),
+        }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image source={require("@src/assets/arrow-left.png")} />
         </TouchableOpacity>
         <Text style={styles.h1}>Notifications</Text>
       </View>
 
-      <View style={{ marginTop: 41, gap: 11 }}>
+      <View style={{ marginTop: moderateScale(41), gap: moderateScale(11) }}>
         <View style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
+              <Icon name='lock' size={moderateScale(24)} color='#ffffff' />
             </View>
             <SemiBoldText sizeBody black>
               Transaction alert
@@ -44,7 +49,7 @@ export const NotificationSettings = ({
           <Switch
             trackColor={{ false: "#E0E0E0", true: "#DB3A09" }}
             thumbColor={isEnabled ? "#f4f3f4" : "#DB3A09"}
-            ios_backgroundColor="#f4f3f4"
+            ios_backgroundColor='#f4f3f4'
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
@@ -53,11 +58,10 @@ export const NotificationSettings = ({
           onPress={() => {
             // navigation.navigate(appScreenNames.VIEW_BANK);
           }}
-          style={styles.otherSettingsOptionsContainer}
-        >
+          style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
+              <Icon name='lock' size={24} color='#ffffff' />
             </View>
             <SemiBoldText sizeBody black>
               Updates

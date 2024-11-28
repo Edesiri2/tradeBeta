@@ -18,6 +18,8 @@ import { addBankSchema } from "@src/form/validation/rules";
 import { TextInputs } from "@src/components/shared/input/Input";
 import { useSelectionModal } from "@src/common/hooks/useSelectionModal";
 import {
+  DVH,
+  DVW,
   moderateScale,
   screenHeight,
   screenWidth,
@@ -53,8 +55,7 @@ export const AddBank = ({
           <TouchableOpacity
             onPress={() => {
               navigation.goBack();
-            }}
-          >
+            }}>
             <Image source={require("@src/assets/arrow-left.png")} />
           </TouchableOpacity>
           <Text style={styles.h1}>Add a bank</Text>
@@ -67,71 +68,87 @@ export const AddBank = ({
               fontSize: 16,
               lineHeight: 24,
               color: "#252525",
-            }}
-          >
+            }}>
             Please make sure the account is primarily yours and corresponds with
             your Tradebeta details.
           </Text>
 
-          <View style={{ width: 350 }}>
-            <Controller
-              control={control}
-              name="bank_name"
-              defaultValue=""
-              render={({ field }) => (
-                <TextInputs
-                  label="Bank name"
-                  placeholder="Select your bank"
-                  iconName="swatchbook"
-                  iconFamily="FontAwesome6"
-                  error={errors?.bank_name?.message}
-                  value={field.value}
-                  onChangeText={(value) => field.onChange(value)}
-                  showErrorText
-                  dropDown
-                  onPressDropDown={() => setModalVisible(!modalVisible)}
-                />
-              )}
-            />
-          </View>
-          <View style={{ width: 350 }}>
-            <Controller
-              control={control}
-              name="account_number"
-              defaultValue=""
-              render={({ field }) => (
-                <TextInputs
-                  label="Account number"
-                  placeholder="6565775875"
-                  iconName="location-pin"
-                  iconFamily="Entypo"
-                  error={errors?.account_number?.message}
-                  value={field.value}
-                  onChangeText={(value) => field.onChange(value)}
-                  showErrorText
-                />
-              )}
-            />
-          </View>
+          {/* <View style={{ width: 350 }}> */}
+          <Controller
+            control={control}
+            name='bank_name'
+            defaultValue=''
+            render={({ field }) => (
+              <TextInputs
+                label='Bank name'
+                placeholder='Select your bank'
+                iconName='swatchbook'
+                iconFamily='FontAwesome6'
+                error={errors?.bank_name?.message}
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                showErrorText
+                dropDown
+                onPressDropDown={() => setModalVisible(!modalVisible)}
+                inputStyle={{
+                  width: DVW(94),
+                }}
+              />
+            )}
+          />
+          {/* </View> */}
+          {/* <View style={{ width: 350 }}> */}
+          <Controller
+            control={control}
+            name='account_number'
+            defaultValue=''
+            render={({ field }) => (
+              <TextInputs
+                label='Account number'
+                placeholder='6565775875'
+                iconName='location-pin'
+                iconFamily='Entypo'
+                error={errors?.account_number?.message}
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                showErrorText
+                inputStyle={{
+                  width: DVW(94),
+                }}
+              />
+            )}
+          />
         </View>
+        {/* </View> */}
 
-        <TouchableOpacity
-          style={styles.addBtn}
+        <Button
+          title='Save Bank'
+          bgMainColor
+          textWhite
+          sizeBody
           onPress={() => {
             setShowModal(!showModal);
           }}
-        >
+          style={{
+            width: "100%",
+          }}
+        />
+
+        {/* <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => {
+            setShowModal(!showModal);
+          }}>
           <Text
             style={{
               color: "#fff",
               fontWeight: "bold",
               fontSize: 16,
               lineHeight: 24,
-            }}
-          >
+            }}>
             Save bank
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </Screen>
       {modalVisible && (
         <View
@@ -142,8 +159,7 @@ export const AddBank = ({
             position: "absolute",
             justifyContent: "center",
             alignItems: "center",
-          }}
-        >
+          }}>
           <SelectionModal
             data={nigeriaBanks}
             modalOpened={modalVisible}
@@ -158,25 +174,24 @@ export const AddBank = ({
               setValue("bank_name", value);
             }}
             selectedValue={selectedModalValue}
-            title="Select Bank"
+            title='Select Bank'
           />
         </View>
       )}
 
       <Modal
-        animationType="slide"
+        animationType='slide'
         transparent={true}
         visible={showModal}
         onRequestClose={() => {
           setShowModal(false);
-        }}
-      >
+        }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <MaterialIcons
-              name="check-circle-outline"
+              name='check-circle-outline'
               size={100}
-              color="green"
+              color='green'
             />
             <View style={{ marginVertical: moderateScale(20) }}>
               <Text style={styles.modalTitle}>Bank Added Successfully!</Text>
@@ -185,7 +200,7 @@ export const AddBank = ({
               </Text>
             </View>
             <Button
-              title="Continue"
+              title='Continue'
               bgMainColor
               sizeBody
               textWhite
@@ -206,23 +221,16 @@ export const AddBank = ({
 
 const styles = StyleSheet.create({
   h1: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
-    lineHeight: 30,
+    lineHeight: moderateScale(30),
     color: "#1C1C1C",
   },
   mainDiv: {
     alignItems: "flex-start",
     justifyContent: "flex-start",
     flex: 1,
-    marginTop: 38,
-  },
-  addBtn: {
-    backgroundColor: "#DB3A09",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 48,
-    borderRadius: 20,
+    marginTop: moderateScale(38),
   },
   modalContainer: {
     flex: 1,

@@ -12,6 +12,7 @@ import {
 import { SemiBoldText } from "@src/components/shared/text";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { useState } from "react";
+import { moderateScale } from "@src/resources/scaling";
 
 export const Security = ({
   navigation,
@@ -20,27 +21,30 @@ export const Security = ({
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <Screen>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: moderateScale(16),
+        }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image source={require("@src/assets/arrow-left.png")} />
         </TouchableOpacity>
         <Text style={styles.h1}>Security</Text>
       </View>
 
-      <View style={{ marginTop: 41, gap: 11 }}>
+      <View style={{ marginTop: moderateScale(41), gap: moderateScale(11) }}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate(appScreenNames.CHANGE_PASSWORD);
           }}
-          style={styles.otherSettingsOptionsContainer}
-        >
+          style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
+              <Icon name='lock' size={moderateScale(24)} color='#ffffff' />
             </View>
             <SemiBoldText sizeBody black>
               Change password
@@ -48,13 +52,10 @@ export const Security = ({
           </View>
           <Image source={require("@src/assets/arrow-right.png")} />
         </TouchableOpacity>
-        <View
-          
-          style={styles.otherSettingsOptionsContainer}
-        >
+        <View style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
+              <Icon name='lock' size={moderateScale(24)} color='#ffffff' />
             </View>
             <SemiBoldText sizeBody black>
               Biometrics login
@@ -63,7 +64,7 @@ export const Security = ({
           <Switch
             trackColor={{ false: "#E0E0E0", true: "#DB3A09" }}
             thumbColor={isEnabled ? "#f4f3f4" : "#DB3A09"}
-            ios_backgroundColor="#f4f3f4"
+            ios_backgroundColor='#f4f3f4'
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
@@ -72,11 +73,10 @@ export const Security = ({
           onPress={() => {
             // navigation.navigate(appScreenNames.VIEW_BANK);
           }}
-          style={styles.otherSettingsOptionsContainer}
-        >
+          style={styles.otherSettingsOptionsContainer}>
           <View style={styles.otherSettingsOptions}>
             <View style={styles.icon}>
-              <Icon name="lock" size={24} color="#ffffff" />
+              <Icon name='lock' size={24} color='#ffffff' />
             </View>
             <SemiBoldText sizeBody black>
               Privacy policy
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
   otherSettingsOptions: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    marginVertical: 12,
+    gap: moderateScale(10),
+    marginVertical: moderateScale(12),
   },
   otherSettingsOptionsContainer: {
     flexDirection: "row",
@@ -102,19 +102,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   icon: {
-    padding: 8,
+    // padding: 8,
     backgroundColor: "#DB3A09",
-    borderRadius: 40 / 2,
+    borderRadius: moderateScale(40) / 2,
     color: "#FFFFFF",
-    width: 40,
-    height: 40,
+    width: moderateScale(40),
+    height: moderateScale(40),
     justifyContent: "center",
     alignItems: "center",
   },
   h1: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
-    lineHeight: 30,
+    lineHeight: moderateScale(30),
     color: "#1C1C1C",
   },
 });

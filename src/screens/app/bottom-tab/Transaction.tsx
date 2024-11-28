@@ -22,37 +22,52 @@ import {
   FontAwesome as Icon,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { DVH, DVW, moderateScale } from "@src/resources/scaling";
+import { DVH, DVW, font, moderateScale } from "@src/resources/scaling";
 import { recentTransaction } from "@src/contants/home";
+import { fontFamily } from "@src/resources/fonts";
+import { transactionStatus } from "@src/contants/transaction-status";
 
 export const Transaction = ({
   navigation,
 }: BottomTabBarScreenProps<bottomTabScreenNames.TRANSACTION>) => {
   return (
-    <View>
+    <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.h3}>Tansactions</Text>
+          {/* <Text style={styles.h3}>Transactions</Text> */}
+          <BoldText sizeBody black>
+            Transactions
+          </BoldText>
           <TouchableOpacity
             style={{
               flexDirection: "row",
               alignItems: "center",
-              gap: 4,
+              gap: moderateScale(4),
               justifyContent: "center",
-              borderWidth: 1,
+              borderWidth: DVW(0.3),
               borderColor: "#383838",
-              padding: 10,
-              borderRadius: 10,
-            }}
-          >
-            <Icon name="clock-o" size={16} color="#252525" />
-            <Text style={{ fontSize: 10 }}>Last 30 days</Text>
-            <Icon name="chevron-down" size={16} color="#252525" />
+              padding: moderateScale(10),
+              borderRadius: moderateScale(10),
+            }}>
+            <Icon name='clock-o' size={moderateScale(16)} color='#252525' />
+            <Text style={{ fontSize: moderateScale(10) }}>Last 30 days</Text>
+            <Icon
+              name='chevron-down'
+              size={moderateScale(16)}
+              color='#252525'
+            />
           </TouchableOpacity>
         </View>
         {/* Chart */}
         <View style={styles.userDetails}>
-          <Text style={styles.h4}>No Transactions yet</Text>
+          {/* <Text style={styles.h4}>No Transactions yet</Text> */}
+          <BoldText
+            sizeBody
+            textStyle={{
+              color: "gray",
+            }}>
+            No Transactions yet
+          </BoldText>
         </View>
       </View>
       <View style={styles.container2}>
@@ -61,13 +76,23 @@ export const Transaction = ({
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-          }}
-        >
-          <Text style={styles.h3}>Transaction History</Text>
+          }}>
+          {/* <Text style={styles.h3}>Transaction History</Text> */}
+          <BoldText sizeBody black>
+            Transaction History
+          </BoldText>
           <TouchableOpacity
-            onPress={() => navigation.navigate(appScreenNames.ALL_TRANSACTIONS)}
-          >
-            <Text style={styles.p}>View all</Text>
+            onPress={() =>
+              navigation.navigate(appScreenNames.ALL_TRANSACTIONS)
+            }>
+            {/* <Text style={styles.p}>View all</Text> */}
+            <BoldText
+              black
+              textStyle={{
+                fontSize: font.size14,
+              }}>
+              View all
+            </BoldText>
           </TouchableOpacity>
         </View>
         <View
@@ -75,105 +100,90 @@ export const Transaction = ({
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: 12,
-            marginTop: 20,
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "#252525",
-              paddingVertical: 8,
-              paddingHorizontal: 12,
-              borderRadius: 16,
-            }}
-          >
-            <Text style={styles.text}>Money Sent</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "#252525",
-              paddingVertical: 8,
-              paddingHorizontal: 12,
-              borderRadius: 16,
-            }}
-          >
-            <Text style={styles.text}>Top Ups</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "#252525",
-              paddingVertical: 8,
-              paddingHorizontal: 12,
-              borderRadius: 16,
-            }}
-          >
-            <Text style={styles.text}>Withdrawn</Text>
-          </TouchableOpacity>
+            gap: moderateScale(12),
+            marginTop: moderateScale(10),
+          }}>
+          {transactionStatus &&
+            transactionStatus.map((items, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  borderWidth: DVW(0.3),
+                  borderColor: "#252525",
+                  paddingVertical: moderateScale(8),
+                  paddingHorizontal: moderateScale(12),
+                  borderRadius: moderateScale(16),
+                }}>
+                <LightText
+                  textStyle={{
+                    fontSize: font.size12,
+                    color: "#252525",
+                  }}>
+                  {items}
+                </LightText>
+              </TouchableOpacity>
+            ))}
         </View>
       </View>
-      <ScrollView style={styles.otherSettings}>
-        <View style={styles.container1}>
-          <FlatList
-            data={recentTransaction}
-            keyExtractor={(items) => items.id.toString()}
-            contentContainerStyle={{
-              flexGrow: 1,
-              marginBottom: DVH(10),
-            }}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("TransactionDetails")}
-                style={styles.btn}
-              >
-                <View style={styles.detailContainer}>
-                  <View style={styles.transactionIcon}>
-                    <MaterialCommunityIcons
-                      name="finance"
-                      size={moderateScale(20)}
-                      color={colors.white}
-                    />
-                  </View>
-                  <View>
-                    <BoldText textStyle={styles.textColor}>
-                      {item.detail}
-                    </BoldText>
-                    <View style={styles.dateTimeContainer}>
-                      <LightText>{item.time} •</LightText>
-                      <LightText>{item.date}</LightText>
-                    </View>
+      <View style={styles.otherSettings}>
+        <FlatList
+          data={recentTransaction}
+          keyExtractor={(items) => items.id.toString()}
+          contentContainerStyle={{
+            // flexGrow: 1,
+            paddingBottom: DVH(10),
+            backgroundColor: colors.white,
+            paddingHorizontal: moderateScale(15),
+          }}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => navigation.navigate("TransactionDetails")}
+              style={styles.btn}>
+              <View style={styles.detailContainer}>
+                <View style={styles.transactionIcon}>
+                  <MaterialCommunityIcons
+                    name='finance'
+                    size={moderateScale(20)}
+                    color={colors.white}
+                  />
+                </View>
+                <View>
+                  <BoldText textStyle={styles.textColor}>
+                    {item.detail}
+                  </BoldText>
+                  <View style={styles.dateTimeContainer}>
+                    <LightText>{item.time} •</LightText>
+                    <LightText>{item.date}</LightText>
                   </View>
                 </View>
-                <BoldText
-                  textStyle={{
-                    color:
-                      item.transType === "send"
-                        ? colors.dark_green
-                        : colors.main_color,
-                  }}
-                >
-                  {item.transType === "send" ? "-" : "+"}
-                  {item.amount}
-                </BoldText>
-              </TouchableOpacity>
-            )}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-            maxToRenderPerBatch={2}
-            initialNumToRender={2}
-            windowSize={2}
-            updateCellsBatchingPeriod={100}
-          />
-          <View
-            style={{
-              paddingVertical: moderateScale(18),
-            }}
-          />
-        </View>
-      </ScrollView>
-    </View>
+              </View>
+              <BoldText
+                textStyle={{
+                  color:
+                    item.transType === "send"
+                      ? colors.dark_green
+                      : colors.main_color,
+                }}>
+                {item.transType === "send" ? "-" : "+"}
+                {item.amount}
+              </BoldText>
+            </TouchableOpacity>
+          )}
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+          maxToRenderPerBatch={2}
+          initialNumToRender={2}
+          windowSize={2}
+          updateCellsBatchingPeriod={100}
+        />
+        <View
+          style={{
+            paddingVertical: DVH(15),
+          }}
+        />
+      </View>
+    </>
   );
 };
 
@@ -202,7 +212,7 @@ const styles = StyleSheet.create({
   h4: {
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: "bold",
+    fontWeight: fontFamily.bold,
     color: "gray",
   },
   p: {

@@ -5,6 +5,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { TextInputs } from "@src/components/shared/input/Input";
 import { addBankTypes } from "@src/form/schema/types";
+import { DVW } from "@src/resources/scaling";
+import { Button } from "@src/components/shared/button";
 
 export const ChangePassword = ({
   navigation,
@@ -24,8 +26,7 @@ export const ChangePassword = ({
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image source={require("@src/assets/arrow-left.png")} />
         </TouchableOpacity>
         <Text style={styles.h1}>Change Password</Text>
@@ -40,44 +41,58 @@ export const ChangePassword = ({
           </Text>
         </View>
         <View>
-          <View style={{ width: 350 }}>
-            <Controller
-              control={control}
-              name="account_number"
-              defaultValue=""
-              render={({ field }) => (
-                <TextInputs
-                  label="Current Password"
-                  placeholder="********"
-                  iconName="lock"
-                  iconFamily="Entypo"
-                  error={errors?.account_number?.message}
-                  value={field.value}
-                  onChangeText={(value) => field.onChange(value)}
-                  showErrorText
-                />
-              )}
-            />
-          </View>
+          {/* <View style={{ width: 350 }}> */}
+          <Controller
+            control={control}
+            name='account_number'
+            defaultValue=''
+            render={({ field }) => (
+              <TextInputs
+                label='Current Password'
+                placeholder='********'
+                iconName='lock'
+                iconFamily='Entypo'
+                error={errors?.account_number?.message}
+                value={field.value}
+                onChangeText={(value) => field.onChange(value)}
+                showErrorText
+                inputStyle={{
+                  width: DVW(94),
+                }}
+              />
+            )}
+          />
+          {/* </View> */}
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.addBtn}
+
+      <Button
+        title='Continue'
+        bgMainColor
+        textWhite
+        sizeBody
         onPress={() => {
           navigation.navigate(appScreenNames.NEW_PASSWORD);
         }}
-      >
+        style={{
+          width: "100%",
+        }}
+      />
+      {/* <TouchableOpacity
+        style={styles.addBtn}
+        onPress={() => {
+          navigation.navigate(appScreenNames.NEW_PASSWORD);
+        }}>
         <Text
           style={{
             color: "#fff",
             fontWeight: "bold",
             fontSize: 16,
             lineHeight: 24,
-          }}
-        >
+          }}>
           Continue
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </Screen>
   );
 };

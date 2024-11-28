@@ -8,10 +8,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  StatusBar,
 } from "react-native";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
 import { SemiBoldText } from "@src/components/shared/text";
+import { Platform } from "react-native";
+import { moderateScale, verticalScale } from "@src/resources/scaling";
 
 export const Settings = ({
   navigation,
@@ -24,9 +27,8 @@ export const Settings = ({
           <TouchableOpacity
             onPress={() => {
               navigation.navigate(appScreenNames.EDIT_PROFILE);
-            }}
-          >
-            <Icon name="edit" size={24} color="#252525" />
+            }}>
+            <Icon name='edit' size={24} color='#252525' />
           </TouchableOpacity>
         </View>
         <View style={styles.userDetails}>
@@ -45,11 +47,10 @@ export const Settings = ({
             onPress={() => {
               navigation.navigate(appScreenNames.VIEW_BANK);
             }}
-            style={styles.otherSettingsOptionsContainer}
-          >
+            style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 My banks
@@ -59,11 +60,10 @@ export const Settings = ({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate(appScreenNames.SECURITY)}
-            style={styles.otherSettingsOptionsContainer}
-          >
+            style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 Security
@@ -86,11 +86,10 @@ export const Settings = ({
             onPress={() =>
               navigation.navigate(appScreenNames.NOTIFICATION_SETTINGS)
             }
-            style={styles.otherSettingsOptionsContainer}
-          >
+            style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 Notifications
@@ -101,7 +100,7 @@ export const Settings = ({
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 Help Center
@@ -112,7 +111,7 @@ export const Settings = ({
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 Contact us
@@ -123,7 +122,7 @@ export const Settings = ({
           <TouchableOpacity style={styles.otherSettingsOptionsContainer}>
             <View style={styles.otherSettingsOptions}>
               <View style={styles.icon}>
-                <Icon name="lock" size={24} color="#ffffff" />
+                <Icon name='lock' size={24} color='#ffffff' />
               </View>
               <SemiBoldText sizeBody black>
                 Log out
@@ -140,9 +139,10 @@ export const Settings = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.main_light_color,
-    paddingTop: 58,
-    paddingHorizontal: 21,
-    paddingBottom: 54,
+    paddingTop:
+      Platform.OS === "ios" ? verticalScale(35) : StatusBar.currentHeight,
+    paddingHorizontal: moderateScale(21),
+    paddingBottom: moderateScale(54),
   },
   container1: {
     paddingVertical: 15,
