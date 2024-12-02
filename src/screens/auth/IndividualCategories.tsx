@@ -40,6 +40,7 @@ import {
 } from "@src/form/validation/rules";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuthStore } from "@src/hooks/store";
+import { useIndividualCategories } from "@src/api/services/actions/auth";
 
 export const IndividualCategories =
   ({}: AuthScreenProps<authScreenNames.INDIVIDUAL_CATEGORIES>) => {
@@ -47,6 +48,7 @@ export const IndividualCategories =
     const { activeStepIndex, submittedStepsIndex, nextStep, prevStep } =
       useStepper(individualKYCFrmSteps);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const {submitFormData, submitting} = useIndividualCategories();
 
     //step 1
     const {
@@ -55,6 +57,7 @@ export const IndividualCategories =
       trigger: individualCategoriesStep1Trigger,
       setValue: individualCategoriesStep1SetValue,
       clearErrors: individualCategoriesStep1ClearErrors,
+      getValues: getIndividualCategoriesStep1Values
     } = useForm<individualCategoriesStep1FrmTypes>({
       mode: "onChange",
       resolver: yupResolver(individualCategoriesStep1FrmSchema),
@@ -67,6 +70,7 @@ export const IndividualCategories =
       trigger: individualCategoriesStep2Trigger,
       setValue: individualCategoriesStep2SetValue,
       clearErrors: individualCategoriesStep2ClearErrors,
+      getValues: getIndividualCategoriesStep2Values
     } = useForm<individualCategoriesStep2FrmTypes>({
       mode: "onChange",
       resolver: yupResolver(individualCategoriesStep2FrmSchema),
@@ -79,6 +83,7 @@ export const IndividualCategories =
       trigger: individualCategoriesStep3Trigger,
       setValue: individualCategoriesStep3SetValue,
       clearErrors: individualCategoriesStep3ClearErrors,
+      getValues: getIndividualCategoriesStep3Values
     } = useForm<individualCategoriesStep3FrmTypes>({
       mode: "onChange",
       resolver: yupResolver(individualCategoriesStep3FrmSchema),
@@ -95,8 +100,49 @@ export const IndividualCategories =
       } else if (activeStepIndex === 2) {
         isValid = await individualCategoriesStep3Trigger();
         if (isValid) {
-          setModalVisible(!modalVisible);
-          console.log("form filled successfully");
+          const {first_name, last_name, mobile_number, nin} = getIndividualCategoriesStep1Values()
+          const {country, state, local_govt, address_line, postal_code} = getIndividualCategoriesStep2Values();
+          const {image} = getIndividualCategoriesStep3Values();
+          await submitFormData({
+            email: string;
+  phone_code: string;
+  phone: string;
+  lastname: string;
+  firstname: string;
+  account_type: string;
+  country: string;
+  state: string;
+  zip_code: string;
+  city: string;
+  address: string;
+  referral_user_code: string;
+  password: string;
+  password_confirmation: string;
+  passport_photograph: {
+    type: string;
+    name: string;
+    uri: string;
+  };
+  id_type: string;
+  id_number: string;
+  id_back_part: {
+    type: string;
+    name: string;
+    uri: string;
+  };
+  id_front_part: {
+    type: string;
+    name: string;
+    uri: string;
+  };
+  cac_registration_number: string;
+  cac_registration_doc: {
+    type: string;
+    name: string;
+    uri: string;
+  };
+  agree: string;
+          })
         }
       }
     };
