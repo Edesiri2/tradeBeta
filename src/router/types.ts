@@ -8,9 +8,18 @@ export interface AuthStackParamList extends ParamListBase {
   CarouselSlider: undefined;
   RegisterInfo: undefined;
   RegistrationForm: undefined;
+  RegistrationOTP: {
+    email: string;
+    password: string;
+    referral_code: string;
+  };
   BusinessKYC: undefined;
   IndividualCategories: undefined;
-  UserCategories: undefined;
+  UserCategories: {
+    email: string;
+    password: string;
+    referral_code: string;
+  };
   BusinessCategories: undefined;
   CreateTransactionPin: undefined;
   ConfirmTransactionPin: {

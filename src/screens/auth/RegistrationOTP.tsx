@@ -26,7 +26,9 @@ const pinLength = 4;
 
 export const RegistrationOTP = ({
   navigation,
+  route,
 }: AuthScreenProps<authScreenNames.REGISTRATION_OTP>) => {
+  const { email, password, referral_code } = route.params;
   const [pinCode, setPinCode] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   return (
@@ -172,7 +174,11 @@ export const RegistrationOTP = ({
               }}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                navigation.navigate(authScreenNames.USER_CATEGORIES);
+                navigation.navigate(authScreenNames.USER_CATEGORIES, {
+                  email: email,
+                  password: password,
+                  referral_code: referral_code,
+                });
               }}
             />
           </View>

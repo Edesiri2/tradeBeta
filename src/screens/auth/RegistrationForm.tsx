@@ -16,15 +16,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registrationFrmSchema } from "@src/form/validation/rules";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ScrollContainer } from "../Scroll-Container";
+import { useCheckUserStore } from "@src/hooks/store";
 
 export const RegistrationForm = ({
   navigation,
 }: AuthScreenProps<authScreenNames.REGISTRATION_FORM>) => {
   const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { checkUser, setCheckUser } = useCheckUserStore();
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<registrationFrmTypes>({
     mode: "onChange",
@@ -54,28 +57,28 @@ export const RegistrationForm = ({
             control={control}
             render={({ field }) => (
               <TextInputs
-                label='Email'
-                placeholder='a@example.com'
-                iconName='mail'
-                iconFamily='Entypo'
+                label="Email"
+                placeholder="a@example.com"
+                iconName="mail"
+                iconFamily="Entypo"
                 error={errors?.email?.message}
                 value={field.value}
                 onChangeText={(value) => field.onChange(value)}
                 showErrorText
               />
             )}
-            name='email'
-            defaultValue=''
+            name="email"
+            defaultValue=""
           />
 
           <Controller
             control={control}
             render={({ field }) => (
               <TextInputs
-                label='Password'
-                placeholder='******'
-                iconName='lock'
-                iconFamily='FontAwesome'
+                label="Password"
+                placeholder="******"
+                iconName="lock"
+                iconFamily="FontAwesome"
                 passwordInput
                 value={field.value}
                 onChangeText={(value) => field.onChange(value)}
@@ -83,26 +86,26 @@ export const RegistrationForm = ({
                 showErrorText
               />
             )}
-            name='password'
-            defaultValue=''
+            name="password"
+            defaultValue=""
           />
 
           <Controller
             control={control}
             render={({ field }) => (
               <TextInputs
-                label='Referral Code'
-                placeholder='Enter a referral code'
-                iconName='users'
-                iconFamily='Entypo'
+                label="Referral Code"
+                placeholder="Enter a referral code"
+                iconName="users"
+                iconFamily="Entypo"
                 error={errors?.referral_code?.message}
                 value={field.value}
                 onChangeText={(value) => field.onChange(value)}
                 showErrorText
               />
             )}
-            name='referral_code'
-            defaultValue=''
+            name="referral_code"
+            defaultValue=""
           />
 
           <View style={styles.checkboxContainer}>
@@ -117,7 +120,7 @@ export const RegistrationForm = ({
             </Text>
           </View>
           <Button
-            title='Continue'
+            title="Continue"
             sizeBody
             textWhite={termsAccepted ? true : false}
             textBlack={!termsAccepted ? true : false}
@@ -133,18 +136,19 @@ export const RegistrationForm = ({
         </ScrollContainer>
       </Screen>
       <Modal
-        animationType='slide'
+        animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
-        }}>
+        }}
+      >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <MaterialIcons
-              name='check-circle-outline'
+              name="check-circle-outline"
               size={100}
-              color='green'
+              color="green"
             />
             <View style={{ marginVertical: moderateScale(20) }}>
               <Text style={styles.modalTitle}>Verification Email Sent!</Text>
@@ -153,7 +157,7 @@ export const RegistrationForm = ({
               </Text>
             </View>
             <Button
-              title='Continue'
+              title="Continue"
               bgMainColor
               sizeBody
               textWhite
@@ -161,11 +165,21 @@ export const RegistrationForm = ({
                 width: "100%",
               }}
               onPress={() => {
+                const { email, password, referral_code } = getValues();
                 setModalVisible(!modalVisible);
-                navigation.navigate(authScreenNames.REGISTRATION_OTP);
+                navigation.navigate(authScreenNames.REGISTRATION_OTP, {
+                  email: email,
+                  password: password,
+                  referral_code: referral_code,
+                });
+                setCheckUser({
+                  email: email,
+                  password: password,
+                  referral_code: referral_code,
+                });
               }}
             />
-            <ButtonOutline
+            {/* <ButtonOutline
               borderMainColor
               textBlack
               sizeBody
@@ -174,7 +188,7 @@ export const RegistrationForm = ({
                 width: "100%",
               }}
               onPress={() => navigation.navigate("")}
-            />
+            /> */}
           </View>
         </View>
       </Modal>
