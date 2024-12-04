@@ -1,7 +1,7 @@
 import { BoldText, LightText } from "@src/components/shared/text";
 import { DVH, moderateScale } from "@src/resources/scaling";
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { customerFrmTypes } from "@src/form/schema/types";
@@ -20,6 +20,7 @@ import {
   bottomTabScreenNames,
 } from "@src/navigation/naviagtion-names";
 import { useAuthStore } from "@src/hooks/store";
+import axios from "axios";
 
 export const Customer = () => {
   const { setIsAuthenticated } = useAuthStore();
@@ -34,12 +35,25 @@ export const Customer = () => {
     resolver: yupResolver(customerFrmSchema),
   });
 
-  const onSubmit = (data: customerFrmTypes) => {
-    if (data) {
-      console.log(data);
-      setIsAuthenticated(true);
-      navigation.navigate(bottomTabScreenNames.HOME);
+  const onSubmit = async (values: customerFrmTypes) => {
+    try {
+      const res = await axios.post(
+        `https://api-47c36b.royaltradebeta.com/api/user/login`,
+        values
+      );
+      if (res.status === 200) {
+        const { token, user } = res.data;
+        console.log(token, user);
+        setIsAuthenticated(true);
+        navigation.navigate(bottomTabScreenNames.HOME);
+      } else {
+        console.log("Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      Alert.alert("Something went wrong. Please try again.");
     }
+    
   };
   return (
     <ScrollContainer style={{}}>
