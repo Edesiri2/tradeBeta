@@ -44,8 +44,9 @@ type payloadType = {
   agree: string;
 };
 
-export const useIndividualCategories = () => {
+export const useBusinessCategories = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const submitFormData = async (payload: payloadType) => {
     setSubmitting(true);
@@ -94,6 +95,7 @@ export const useIndividualCategories = () => {
       });
       if (status === 200) {
         Alert.alert("Success", "User registered successfully");
+        setModalVisible(!modalVisible);
       } else {
         if (data && data?.message?.error) {
           const errorMessages = data?.message?.error?.join("\n"); // Join the array with new lines
@@ -115,5 +117,7 @@ export const useIndividualCategories = () => {
   return {
     submitFormData,
     submitting,
+    setModalVisible,
+    modalVisible,
   };
 };

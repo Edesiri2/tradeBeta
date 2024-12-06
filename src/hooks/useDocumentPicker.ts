@@ -15,7 +15,9 @@ export const useDocumentPicker = () => {
   const pickDocument = async () => {
     setDocumentLoading(true);
     try {
-      const result = await DocumentPicker.getDocumentAsync({});
+      const result = await DocumentPicker.getDocumentAsync({
+        type: "image/*", // Restrict to image files (jpg, jpeg, png, etc.)
+      });
       if (result.canceled !== true) {
         const fileSize = result?.assets[0]?.size;
         const documentData: documentFileType = result?.assets[0];

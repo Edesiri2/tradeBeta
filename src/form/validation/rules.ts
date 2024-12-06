@@ -93,4 +93,6 @@ export const businessCategoriesStep2FrmSchema = yup.object().shape({
 
 export const businessCategoriesStep3FrmSchema = yup.object().shape({
   cac_certificate: yup.string().required("certificate not picked yet"),
+  certificateType: yup.string().required("certificate type is required"),
+  certificateName: yup.string().required("certificate name is required"),
 });

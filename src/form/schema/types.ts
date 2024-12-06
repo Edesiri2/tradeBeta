@@ -61,4 +61,6 @@ export type businessCategoriesStep2FrmTypes = {
 
 export type businessCategoriesStep3FrmTypes = {
   cac_certificate: string;
+  certificateType: string;
+  certificateName: string;
 };

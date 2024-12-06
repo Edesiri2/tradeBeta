@@ -11,6 +11,7 @@ import { StyleSheet, View } from "react-native";
 import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { Button } from "@src/components/shared/button";
 import { documentFileType, useDocumentPicker } from "@src/hooks";
+import { returnFileName, returnFileType } from "@src/helper/helper";
 
 type personalFrmProps = {
   useFormProps: any;
@@ -44,7 +45,24 @@ export const BusinessVerify: React.FC<personalFrmProps> = ({
         size: pickedDocumentData.data?.size,
         uri: pickedDocumentData.data?.uri,
       });
-      props?.setValues("cac_certificate", pickedDocumentData?.data?.name);
+      props?.setValues("cac_certificate", pickedDocumentData?.data?.uri);
+      props?.setValues(
+        "certificateType",
+        `application/${returnFileType(String(pickedDocumentData?.data?.uri))}`
+      );
+      props?.setValues(
+        "certificateName",
+        returnFileName(String(pickedDocumentData?.data?.uri))
+      );
+      console.log("cac_certificate", pickedDocumentData?.data?.uri);
+      console.log(
+        "certificateType",
+        `image/${returnFileType(String(pickedDocumentData?.data?.uri))}`
+      );
+      console.log(
+        "certificateName",
+        returnFileName(String(pickedDocumentData?.data?.uri))
+      );
       setUploaded(pickedDocumentData?.uploaded);
       return;
     }

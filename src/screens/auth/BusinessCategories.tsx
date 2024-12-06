@@ -39,13 +39,17 @@ import {
   businessCategoriesStep3FrmSchema,
 } from "@src/form/validation/rules";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useBusinessCategories } from "@src/api/services/actions/auth";
+import { useCheckUserStore } from "@src/hooks/store";
 
 export const BusinessCategories = ({
   navigation,
 }: AuthScreenProps<authScreenNames.BUSINESS_CATEGORIES>) => {
   const { activeStepIndex, submittedStepsIndex, nextStep, prevStep } =
     useStepper(businessKYCFrmSteps);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { submitFormData, submitting, modalVisible, setModalVisible } =
+    useBusinessCategories();
+  const { checkUser } = useCheckUserStore();
 
   //step 1
   const {
@@ -54,6 +58,7 @@ export const BusinessCategories = ({
     trigger: businessCategoriesStep1Trigger,
     setValue: businessCategoriesStep1SetValue,
     clearErrors: businessCategoriesStep1ClearErrors,
+    getValues: getBusinessCategoriesStep1FrmValues,
   } = useForm<businessCategoriesStep1FrmTypes>({
     mode: "onChange",
     resolver: yupResolver(businessCategoriesStep1FrmSchema),
@@ -66,6 +71,7 @@ export const BusinessCategories = ({
     trigger: businessCategoriesStep2Trigger,
     setValue: businessCategoriesStep2SetValue,
     clearErrors: businessCategoriesStep2ClearErrors,
+    getValues: getBusinessCategoriesStep2FrmValues,
   } = useForm<businessCategoriesStep2FrmTypes>({
     mode: "onChange",
     resolver: yupResolver(businessCategoriesStep2FrmSchema),
@@ -78,6 +84,7 @@ export const BusinessCategories = ({
     trigger: businessCategoriesStep3Trigger,
     setValue: businessCategoriesStep3SetValue,
     clearErrors: businessCategoriesStep3ClearErrors,
+    getValues: getBusinessCategoriesStep3FrmValues,
   } = useForm<businessCategoriesStep3FrmTypes>({
     mode: "onChange",
     resolver: yupResolver(businessCategoriesStep3FrmSchema),
@@ -94,8 +101,56 @@ export const BusinessCategories = ({
     } else if (activeStepIndex === 2) {
       isValid = await businessCategoriesStep3Trigger();
       if (isValid) {
-        setModalVisible(!modalVisible);
-        console.log("form filled successfully");
+        const {
+          business_name,
+          business_class,
+          business_number,
+          cac_reg_number,
+        } = getBusinessCategoriesStep1FrmValues();
+        const { country, state, lga, address_line, postal_code } =
+          getBusinessCategoriesStep2FrmValues();
+        const { cac_certificate, certificateName, certificateType } =
+          getBusinessCategoriesStep3FrmValues();
+        await submitFormData({
+          email: checkUser.email,
+          phone_code: "+234",
+          phone: business_number,
+          lastname: business_name,
+          firstname: business_name,
+          account_type: "corporate",
+          country: country,
+          state: state,
+          zip_code: postal_code,
+          city: lga,
+          address: address_line,
+          referral_user_code: checkUser.referral_code,
+          password: checkUser.password,
+          password_confirmation: checkUser.password,
+          passport_photograph: {
+            type: certificateType,
+            name: certificateName,
+            uri: cac_certificate,
+          },
+          id_type: "CAC",
+          id_number: cac_reg_number,
+          id_back_part: {
+            type: certificateType,
+            name: certificateName,
+            uri: cac_certificate,
+          },
+          id_front_part: {
+            type: certificateType,
+            name: certificateName,
+            uri: cac_certificate,
+          },
+          cac_registration_number: cac_reg_number,
+          cac_registration_doc: {
+            type: certificateType,
+            name: certificateName,
+            uri: cac_certificate,
+          },
+          agree: "1",
+        });
       }
     }
   };
@@ -168,7 +223,8 @@ export const BusinessCategories = ({
           style={{
             width: "100%",
           }}
-          onPress={() => onSubmit()}
+          onPress={async () => await onSubmit()}
+          isLoading={submitting}
         />
       </View>
       <Modal
