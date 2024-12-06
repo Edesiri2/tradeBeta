@@ -31,3 +31,16 @@ export const getIconComponent = async (iconFamily: string) => {
 export const formatAmount = (price: number) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+export const returnFileName = (filePath: string) => {
+  // Get the file name with extension
+  const fileName = filePath.split("/").pop();
+  return fileName && fileName;
+};
+
+export const returnFileType = (filePath: string) => {
+  // Get the file name with extension
+  const fileType = filePath.split("/").pop();
+  // Extract and return the file extension
+  return fileType && fileType.split(".").pop();
+};

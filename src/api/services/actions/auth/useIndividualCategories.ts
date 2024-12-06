@@ -73,21 +73,21 @@ export const useIndividualCategories = () => {
       type: payload.passport_photograph.type, // or the appropriate MIME type
       name: payload.passport_photograph.name,
     } as unknown as Blob);
-    formData.append("id_back_part", {
-      uri: payload.id_back_part.uri,
-      type: payload.id_back_part.type, // or the appropriate MIME type
-      name: payload.id_back_part.name,
-    } as unknown as Blob);
-    formData.append("id_front_part", {
-      uri: payload.id_front_part.uri,
-      type: payload.id_front_part.type, // or the appropriate MIME type
-      name: payload.id_front_part.name,
-    } as unknown as Blob);
-    formData.append("cac_registration_doc", {
-      uri: payload.cac_registration_doc.uri,
-      type: payload.cac_registration_doc.type, // or the appropriate MIME type
-      name: payload.cac_registration_doc.name,
-    } as unknown as Blob);
+    // formData.append("id_back_part", {
+    //   uri: payload.id_back_part.uri,
+    //   type: payload.id_back_part.type, // or the appropriate MIME type
+    //   name: payload.id_back_part.name,
+    // } as unknown as Blob);
+    // formData.append("id_front_part", {
+    //   uri: payload.id_front_part.uri,
+    //   type: payload.id_front_part.type, // or the appropriate MIME type
+    //   name: payload.id_front_part.name,
+    // } as unknown as Blob);
+    // formData.append("cac_registration_doc", {
+    //   uri: payload.cac_registration_doc.uri,
+    //   type: payload.cac_registration_doc.type, // or the appropriate MIME type
+    //   name: payload.cac_registration_doc.name,
+    // } as unknown as Blob);
     try {
       const { status, data } = await Post(auth.REGISTER, formData, {
         "Content-Type": "multipart/form-data",

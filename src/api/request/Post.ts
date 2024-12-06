@@ -4,7 +4,7 @@ import { BASE_URL } from "@env";
 export const Post = async (endpoint: string, payload: any, headers: any) => {
   try {
     const { data, status } = await axios.post(
-      `${BASE_URL}/${endpoint}`,
+      `${BASE_URL}${endpoint}`,
       payload,
       headers
     );

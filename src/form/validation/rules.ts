@@ -18,7 +18,7 @@ export const addBankSchema = yup.object().shape({
     .string()
     .required("account number is required")
     .matches(/^[0-9]+$/, "field must be number only"),
-})
+});
 
 export const customerFrmSchema = yup.object().shape({
   email: yup
@@ -72,6 +72,8 @@ export const individualCategoriesStep2FrmSchema = yup.object().shape({
 
 export const individualCategoriesStep3FrmSchema = yup.object().shape({
   image: yup.string().required("image is required"),
+  imageName: yup.string().required("image name is required"),
+  imageType: yup.string().required("image type is required"),
 });
 
 export const businessCategoriesStep1FrmSchema = yup.object().shape({

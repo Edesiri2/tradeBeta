@@ -40,6 +40,8 @@ export type individualCategoriesStep2FrmTypes = {
 
 export type individualCategoriesStep3FrmTypes = {
   image: string;
+  imageType: string;
+  imageName: string;
 };
 
 export type businessCategoriesStep1FrmTypes = {

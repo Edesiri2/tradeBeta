@@ -105,10 +105,11 @@ export const IndividualCategories =
             getIndividualCategoriesStep1Values();
           const { country, state, local_govt, address_line, postal_code } =
             getIndividualCategoriesStep2Values();
-          const { image } = getIndividualCategoriesStep3Values();
+          const { image, imageName, imageType } =
+            getIndividualCategoriesStep3Values();
           await submitFormData({
             email: checkUser.email,
-            phone_code: "",
+            phone_code: "+234",
             phone: mobile_number,
             lastname: last_name,
             firstname: first_name,
@@ -122,9 +123,9 @@ export const IndividualCategories =
             password: checkUser.password,
             password_confirmation: checkUser.password,
             passport_photograph: {
-              type: "",
-              name: "",
-              uri: "",
+              type: imageType,
+              name: imageName,
+              uri: image,
             },
             id_type: "NIN",
             id_number: nin,
@@ -138,7 +139,7 @@ export const IndividualCategories =
               name: "",
               uri: "",
             },
-            cac_registration_number: "",
+            cac_registration_number: "1234567",
             cac_registration_doc: {
               type: "",
               name: "",
@@ -186,7 +187,7 @@ export const IndividualCategories =
               submittedSteps={submittedStepsIndex}
               submittedBgColor={`${colors.main_color}`}
               activeBgColor={colors.darkGray}
-              stepperType="horizontal-title"
+              stepperType='horizontal-title'
             />
           </View>
           <View style={styles.titleContainer}>
@@ -211,30 +212,30 @@ export const IndividualCategories =
           </View>
           {steps[activeStepIndex]}
           <Button
-            title="Continue"
+            title='Continue'
             bgMainColor
             sizeBody
             textWhite
             style={{
               width: "100%",
             }}
-            onPress={() => onSubmit()}
+            onPress={async () => await onSubmit()}
+            isLoading={submitting}
           />
         </View>
         <Modal
-          animationType="slide"
+          animationType='slide'
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
             setModalVisible(false);
-          }}
-        >
+          }}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <MaterialIcons
-                name="check-circle-outline"
+                name='check-circle-outline'
                 size={100}
-                color="green"
+                color='green'
               />
               <View style={{ marginVertical: moderateScale(20) }}>
                 <Text style={styles.modalTitle}>Verification Email Sent!</Text>
@@ -244,7 +245,7 @@ export const IndividualCategories =
                 </Text>
               </View>
               <Button
-                title="Continue"
+                title='Continue'
                 bgMainColor
                 sizeBody
                 textWhite

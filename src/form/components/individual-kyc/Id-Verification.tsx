@@ -10,6 +10,7 @@ import { colors } from "@src/resources/colors";
 import { LightText } from "@src/components/shared/text";
 import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
 import { Button } from "@src/components/shared/button";
+import { returnFileName, returnFileType } from "@src/helper/helper";
 
 type idVerificationFrmProps = {
   useFormProps: any;
@@ -52,6 +53,12 @@ export const IdVerification: React.FC<idVerificationFrmProps> = ({
       setPicUri(photo?.uri);
       setCameraStarted(!cameraStarted);
       props?.setValues("image", photo?.uri);
+      props?.setValues("imageType", `image/${returnFileType(photo?.uri)}`);
+      props?.setValues("imageName", returnFileName(photo?.uri));
+
+      // console.log("image", photo?.uri);
+      // console.log("imageType", `image/${returnFileType(photo?.uri)}`);
+      // console.log("imageName", returnFileName(photo?.uri));
       // Do something with the photo
     }
   };
