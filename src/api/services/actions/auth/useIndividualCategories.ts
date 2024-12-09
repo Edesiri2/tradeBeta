@@ -1,5 +1,8 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { auth } from "@src/api/endpoint/endpoint";
 import { Post } from "@src/api/request";
+import { authScreenNames } from "@src/navigation";
+import { RootStackParamList } from "@src/router/types";
 import { useState } from "react";
 import { Alert } from "react-native";
 
@@ -46,6 +49,7 @@ type payloadType = {
 
 export const useIndividualCategories = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const navigation: NavigationProp<RootStackParamList> = useNavigation();
 
   const submitFormData = async (payload: payloadType) => {
     setSubmitting(true);
@@ -94,6 +98,7 @@ export const useIndividualCategories = () => {
       });
       if (status === 200) {
         Alert.alert("Success", "User registered successfully");
+        navigation.navigate(authScreenNames.CAROUSEL_SLIDER);
       } else {
         if (data && data?.message?.error) {
           const errorMessages = data?.message?.error?.join("\n"); // Join the array with new lines
