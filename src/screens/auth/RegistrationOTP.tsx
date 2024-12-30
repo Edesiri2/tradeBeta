@@ -1,6 +1,6 @@
 import { authScreenNames } from "@src/navigation/naviagtion-names";
 import { AuthScreenProps } from "@src/router/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Screen } from "../Screen";
 import { AuthHeader } from "@src/components/auth";
 import {
@@ -20,9 +20,12 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { Button } from "@src/components/shared/button";
+import { useCheckUserStore } from "@src/hooks/store";
+import { useVerifyOtp } from "@src/api/services/actions/auth";
+import { Loader } from "@src/common";
 
 const dialPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, "del"];
-const pinLength = 4;
+const pinLength = 6;
 
 export const RegistrationOTP = ({
   navigation,
@@ -31,6 +34,30 @@ export const RegistrationOTP = ({
   const { email, password, referral_code } = route.params;
   const [pinCode, setPinCode] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { checkUser } = useCheckUserStore();
+  const { verifyOTP, verifyingOtp, isOTPVerified } = useVerifyOtp();
+
+  useEffect(() => {
+    const initiatePinVerification = async () => {
+      if (pinCode.length > 5) {
+        const numericResult = String(pinCode.join(""));
+        // setModalVisible(!modalVisible);
+        await verifyOTP({
+          email: email,
+          code: numericResult,
+        });
+      }
+    };
+    initiatePinVerification();
+  }, [pinCode]);
+
+  useEffect(() => {
+    if (isOTPVerified) {
+      setModalVisible(true);
+    } else {
+      setModalVisible(false);
+    }
+  }, [isOTPVerified]);
   return (
     <>
       <Screen>
@@ -42,7 +69,7 @@ export const RegistrationOTP = ({
           <LightText sizeBody black>
             We've sent a four digit code to your email
             <LightText sizeBody mainColor>
-              temi.owoade@gmail.com
+              {checkUser?.email}
             </LightText>
           </LightText>
         </View>
@@ -59,6 +86,15 @@ export const RegistrationOTP = ({
               );
             })}
           </View>
+          {verifyingOtp && (
+            <View
+              style={{
+                paddingVertical: moderateScale(10),
+                marginBottom: moderateScale(10),
+              }}>
+              <Loader size='small' color={colors.main_color} />
+            </View>
+          )}
           <View
             style={{
               justifyContent: "center",
@@ -97,12 +133,7 @@ export const RegistrationOTP = ({
                             prevCode.slice(0, prevCode.length - 1)
                           );
                         } else if (typeof item === "number") {
-                          if (
-                            pinCode &&
-                            pinCode.length ===
-                              4 /*it checks through if the array is gr*/
-                          ) {
-                            setModalVisible(!modalVisible);
+                          if (pinCode && pinCode.length === 6) {
                           } else {
                             setPinCode((prevCode: any) => [...prevCode, item]);
                           }
