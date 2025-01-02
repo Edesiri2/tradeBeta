@@ -66,10 +66,14 @@ interface IAuthStoreProps {
   setUserData: (value: UserDataType) => void;
   isAuthenticated: boolean;
   setIsAuthenticated: (value: boolean) => void;
+  userRole: string;
+  setUserRole: (role: string) => void;
+  isConsultant: () => boolean;
+  isCustomer: () => boolean;
 }
 
 // Create Zustand store
-export const useAuthStore = create<IAuthStoreProps>((set) => ({
+export const useAuthStore = create<IAuthStoreProps>((set, get) => ({
   userData: {
     token: "",
     id: 0,
@@ -125,4 +129,8 @@ export const useAuthStore = create<IAuthStoreProps>((set) => ({
   setUserData: (userData) => set({ userData }),
   isAuthenticated: false,
   setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
+  userRole: '', 
+  setUserRole: (role: string) => set({ userRole: role }), 
+  isConsultant: () => get().userRole === 'Consultant', 
+  isCustomer: () => get().userRole === 'Customer',
 }));

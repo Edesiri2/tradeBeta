@@ -21,9 +21,11 @@ import {
 } from "@src/navigation/naviagtion-names";
 import { useAuthStore } from "@src/hooks/store";
 import axios from "axios";
+import { Post } from "@src/api/request";
 
 export const Customer = () => {
-  const { setIsAuthenticated } = useAuthStore();
+  const { setIsAuthenticated, setUserData, userRole, setUserRole } =
+    useAuthStore();
   const [isChecked, setChecked] = useState<boolean>(false);
   const navigation: NavigationProp<AuthStackParamList> = useNavigation();
   const {
@@ -37,15 +39,13 @@ export const Customer = () => {
 
   const onSubmit = async (values: customerFrmTypes) => {
     try {
-      const res = await axios.post(
-        `https://api-47c36b.royaltradebeta.com/api/user/login`,
-        values
-      );
-      if (res.status === 200) {
-        const { token, user } = res.data;
+      const { status, data } = await Post("/api/user/login", values, {});
+      if (status === 200) {
+        const { token, user } = data;
         console.log(token, user);
         setIsAuthenticated(true);
-        navigation.navigate(bottomTabScreenNames.HOME);
+        setUserData(user);
+        setUserRole("Customer");
       } else {
         console.log("Invalid credentials");
       }
@@ -53,7 +53,6 @@ export const Customer = () => {
       console.error("Login Error:", error);
       Alert.alert("Something went wrong. Please try again.");
     }
-    
   };
   return (
     <ScrollContainer style={{}}>
