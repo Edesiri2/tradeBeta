@@ -24,15 +24,21 @@ export const SendMoney = ({
   navigation,
 }: RootStackScreenProps<appScreenNames.SEND_MONEY>) => {
   const [pinCode, setPinCode] = useState<any[]>([]);
+
+  const handleSendMoney = () => {
+    navigation.navigate(appScreenNames.PAYMENT_METHOD);
+  };
+
   return (
     <Screen>
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}>
+          }}
+        >
           <MaterialIcons
-            name='arrow-back-ios'
+            name="arrow-back-ios"
             size={moderateScale(20)}
             color={colors.black}
           />
@@ -60,13 +66,14 @@ export const SendMoney = ({
             alignItems: "center",
             height: "80%",
             gap: moderateScale(30),
-          }}>
+          }}
+        >
           <Button
-            title='Continue'
+            title="Continue"
             bgMainColor
             sizeBody
             textWhite
-            onPress={() => {}}
+            onPress={() => navigation.navigate(appScreenNames.PAYMENT_METHOD)}
           />
           <FlatList
             data={dialPad}
@@ -104,22 +111,23 @@ export const SendMoney = ({
                       }
                     }}
                     // disabled={item === "finger-print"}
-                    style={styles.codeBtn}>
+                    style={styles.codeBtn}
+                  >
                     {item === "del" ? (
                       <Ionicons
-                        name='backspace-outline'
+                        name="backspace-outline"
                         size={moderateScale(20)}
                         color={colors.black}
                       />
                     ) : item === "finger-print" ? (
                       <Ionicons
-                        name='finger-print'
+                        name="finger-print"
                         size={moderateScale(34)}
                         color={colors.black}
                       />
                     ) : item === "finger-print" ? (
                       <MaterialCommunityIcons
-                        name='asterisk'
+                        name="asterisk"
                         size={moderateScale(20)}
                         color={colors.lightGray}
                       />
@@ -146,7 +154,7 @@ const styles = StyleSheet.create({
     gap: moderateScale(10),
   },
   sendScreen: {
-    paddingVertical: DVH(5),
+    paddingVertical: DVH(3),
     flexDirection: "column",
   },
   titleContainer: {

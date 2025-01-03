@@ -19,7 +19,7 @@ export const useLogin = () => {
       const { status, data } = await Post(auth.LOGIN, payload, {});
       if (status === 200) {
         setUserData(data?.data);
-        setIsAuthenticated(true); //automatically navigates to sign-in screen
+        setIsAuthenticated(true); 
       } else {
         Alert.alert("Error", "An Error Occurred while login-in");
       }

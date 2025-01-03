@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Screen } from "../../Screen";
 import { BoldText, LightText, SemiBoldText } from "@src/components/shared/text";
 import { BottomTabBarScreenProps } from "@src/router/types";
@@ -21,12 +21,38 @@ import {
 import { colors } from "@src/resources/colors";
 import { Button } from "@src/components/shared/button";
 import { homeAmountCard, recentTransaction } from "@src/contants/home";
+import { useAuthStore } from "@src/hooks/store";
+import { useAddMoneyInfo } from "@src/api/services/actions/app-services/useAddMoneyInfo";
 
 const arrowSymbol = "\u21E5";
 
 export const Home = ({
   navigation,
 }: BottomTabBarScreenProps<bottomTabScreenNames.HOME>) => {
+  const { token, userData } = useAuthStore();
+  const { addMoneyInfo } = useAddMoneyInfo();
+  const [userWallet, setUserWallet] = useState<any>(null);
+  const [getTranx, setGetTranx] = useState<any[]>([]);
+
+  useLayoutEffect(() => {
+    const fetchMoneyInfo = async () => {
+      console.log("Token:", token);
+      const data = await addMoneyInfo(token);
+      console.log("Money Info:", data);
+      setUserWallet(data);
+    };
+    fetchMoneyInfo();
+  }, [token]);
+
+  useLayoutEffect(() => {
+    const fetchTransactions = async () => {
+      const data = await addMoneyInfo(token);
+      setGetTranx(data?.transactionss);
+      console.log("Transactions:", data?.transactionss);
+    };
+    fetchTransactions();
+  }, [token]);
+
   return (
     <>
       <View style={styles.container}>
@@ -36,29 +62,34 @@ export const Home = ({
             paddingTop:
               Platform.OS === "ios" ? verticalScale(30) : verticalScale(20),
             paddingBottom: 20,
-          }}>
+          }}
+        >
           <View style={styles.header}>
             <View style={styles.imgContainer}>
               <Image
-                source={require("@src/assets/home-user.png")}
+                source={
+                  userData.userImage
+                    ? { uri: userData.userImage }
+                    : require("@src/assets/home-user.png")
+                }
                 style={styles.image}
-                resizeMode='contain'
+                resizeMode="contain"
               />
               <BoldText sizeBody textStyle={styles.textColor}>
-                Hi, Yemi
+                Hi, {userData?.fullname}
               </BoldText>
             </View>
             <View style={styles.headerActionBtn}>
               <TouchableOpacity>
                 <Ionicons
-                  name='eye'
+                  name="eye"
                   color={"#252525"}
                   size={moderateScale(20)}
                 />
               </TouchableOpacity>
               <TouchableOpacity>
                 <Ionicons
-                  name='notifications'
+                  name="notifications"
                   color={"#252525"}
                   size={moderateScale(20)}
                 />
@@ -69,18 +100,21 @@ export const Home = ({
             <View
               style={{
                 flexDirection: "row",
-              }}>
+                alignItems: "center",
+                gap: moderateScale(5),
+              }}
+            >
               <BoldText sizeMedium textStyle={styles.textColor}>
                 ¥
               </BoldText>
               <BoldText sizeXtraLarge textStyle={styles.textColor}>
-                794.00
+                {userWallet?.userWallet?.balance}
               </BoldText>
             </View>
             <SemiBoldText sizeSmall>Available Wallet balance</SemiBoldText>
             <View style={styles.btnContainer}>
               <Button
-                title='Send'
+                title="Send"
                 textWhite
                 sizeBody
                 bgMainColor
@@ -92,14 +126,14 @@ export const Home = ({
                 }}
                 leftIcon={
                   <FontAwesome
-                    name='send'
+                    name="send"
                     color={colors.white}
                     size={moderateScale(15)}
                   />
                 }
               />
               <Button
-                title='Withdraw'
+                title="Withdraw"
                 textWhite
                 sizeBody
                 style={{
@@ -111,7 +145,7 @@ export const Home = ({
                 }}
                 leftIcon={
                   <Feather
-                    name='download'
+                    name="download"
                     color={colors.white}
                     size={moderateScale(15)}
                   />
@@ -131,7 +165,7 @@ export const Home = ({
                   </View>
                   <View style={styles.amountText}>
                     <BoldText sizeBody textStyle={styles.textColor}>
-                      {item.price}
+                      {userWallet?.gateways[0]?.currencies[0]?.rate}
                     </BoldText>
                     <BoldText sizeBody textStyle={styles.textColor}>
                       ⇆
@@ -140,7 +174,11 @@ export const Home = ({
                       ¥ {item.at}
                     </BoldText>
                   </View>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(appScreenNames.TOP_UP);
+                    }}
+                  >
                     <BoldText sizeBody mainColor>
                       {item.type === "top up"
                         ? "TOP UP +"
@@ -155,7 +193,8 @@ export const Home = ({
           style={{
             paddingHorizontal: moderateScale(20),
             backgroundColor: "#fff",
-          }}>
+          }}
+        >
           <View style={styles.recentTransHeader}>
             <BoldText sizeBody textStyle={styles.textColor}>
               Recent Transaction
@@ -163,19 +202,35 @@ export const Home = ({
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate(appScreenNames.ALL_TRANSACTIONS)
-              }>
+              }
+            >
               <SemiBoldText sizeSmall textStyle={styles.textColor}>
                 View All
               </SemiBoldText>
             </TouchableOpacity>
           </View>
         </View>
+        {getTranx.length === 0 && (
+          <View
+            style={{
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: colors.white,
+            }}
+          >
+            <BoldText sizeBody darkGray style={{ marginTop: DVH(10) }}>
+              No transaction yet
+            </BoldText>
+          </View>
+        )}
         <View
           style={{
             height: "100%",
-          }}>
+          }}
+        >
           <FlatList
-            data={recentTransaction}
+            data={getTranx}
             keyExtractor={(items) => items.id.toString()}
             contentContainerStyle={{
               flexGrow: 1,
@@ -188,34 +243,44 @@ export const Home = ({
                 <TouchableOpacity
                   key={index}
                   onPress={() => navigation.navigate("TransactionDetails")}
-                  style={styles.btn}>
+                  style={styles.btn}
+                >
                   <View style={styles.detailContainer}>
                     <View style={styles.transactionIcon}>
                       <MaterialCommunityIcons
-                        name='finance'
+                        name="finance"
                         size={moderateScale(20)}
                         color={colors.white}
                       />
                     </View>
                     <View>
                       <BoldText textStyle={styles.textColor}>
-                        {item.detail}
+                        {item.transaction_type}
                       </BoldText>
                       <View style={styles.dateTimeContainer}>
-                        <LightText>{item.time} •</LightText>
-                        <LightText>{item.date}</LightText>
+                        {/* <LightText>{item.date} •</LightText> */}
+                        <LightText>
+                          {new Date(item.date_time).toLocaleString(undefined, {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </LightText>
                       </View>
                     </View>
                   </View>
                   <BoldText
                     textStyle={{
                       color:
-                        item.transType === "send"
+                        item.transaction_type === "ADD-MONEY"
                           ? colors.dark_green
                           : colors.main_color,
-                    }}>
+                    }}
+                  >
                     {item.transType === "send" ? "-" : "+"}
-                    {item.amount}
+                    {item.total_charge}
                   </BoldText>
                 </TouchableOpacity>
               </View>

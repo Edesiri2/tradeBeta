@@ -40,4 +40,7 @@ export enum appScreenNames {
   EDIT_PROFILE = "EditProfile",
   TRANSACTION_DETAILS = "TransactionDetails",
   ALL_TRANSACTIONS = "AllTransactions",
+  PAYMENT_METHOD = "PaymentMethod",
+  BANK_TRANSFER = "BankTransfer",
+  PAY_WITH_BANK = "PayWithBank",
 }

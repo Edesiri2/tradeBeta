@@ -8,7 +8,6 @@ export const Post = async (endpoint: string, payload: any, headers: any) => {
       payload,
       headers
     );
-    // const { status, data } = res;
     console.log(data);
     return { status, data };
   } catch (err: any) {

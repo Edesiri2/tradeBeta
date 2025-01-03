@@ -7,7 +7,7 @@ export const Get = async (
   payload?: Record<string, any> // Use Record<string, any> to type an object payload
 ): Promise<{ status: number; data?: any }> => {
   try {
-    const res = await axios.get(`${BASE_URL}/${endpoint}`, {
+    const res = await axios.get(`${BASE_URL}${endpoint}`, {
       headers,
       params: { ...payload }, // Spread payload to pass query parameters
     });

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 type UserDataType = {
-  token: string;
   id: number;
   firstname: string;
   lastname: string;
@@ -62,6 +61,8 @@ type UserDataType = {
 };
 
 interface IAuthStoreProps {
+  token: string;
+  setToken: (value: string) => void;
   userData: UserDataType;
   setUserData: (value: UserDataType) => void;
   isAuthenticated: boolean;
@@ -74,8 +75,9 @@ interface IAuthStoreProps {
 
 // Create Zustand store
 export const useAuthStore = create<IAuthStoreProps>((set, get) => ({
+  token: "",
+  setToken: (token) => set({ token }),
   userData: {
-    token: "",
     id: 0,
     firstname: "",
     lastname: "",
@@ -129,8 +131,8 @@ export const useAuthStore = create<IAuthStoreProps>((set, get) => ({
   setUserData: (userData) => set({ userData }),
   isAuthenticated: false,
   setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
-  userRole: '', 
-  setUserRole: (role: string) => set({ userRole: role }), 
-  isConsultant: () => get().userRole === 'Consultant', 
-  isCustomer: () => get().userRole === 'Customer',
+  userRole: "",
+  setUserRole: (role: string) => set({ userRole: role }),
+  isConsultant: () => get().userRole === "Consultant",
+  isCustomer: () => get().userRole === "Customer",
 }));

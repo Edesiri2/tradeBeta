@@ -1,7 +1,7 @@
 import { appScreenTypes } from "@src/types/types";
 import { appScreenNames } from "./naviagtion-names";
 import { BottomTabStack } from "@src/router/bottom-tab-stack";
-import { ChatMessage, SendMoney, WithDraw } from "@src/screens/app";
+import { ChatMessage, SendMoney, TopUp, WithDraw } from "@src/screens/app";
 import { AddBank } from "@src/screens/app/AddBank";
 import { ViewBank } from "@src/screens/app/ViewBank";
 import { BankDetails } from "@src/screens/app/BankDetails";
@@ -12,6 +12,9 @@ import { NotificationSettings } from "@src/screens/app/NotificationSettings";
 import { EditProfile } from "@src/screens/app/EditProfile";
 import TransactionDetails from "@src/screens/app/TransactionDetails";
 import AllTransactions from "@src/screens/app/AllTransactions";
+import { PaymentMethod } from "@src/screens/app/PaymentMethod";
+import { BankTransfer } from "@src/screens/app/BankTransfer";
+import { PayWithBank } from "@src/screens/app/PayWithBank";
 
 export const appScreen: appScreenTypes[] = [
   {
@@ -69,5 +72,21 @@ export const appScreen: appScreenTypes[] = [
   {
     screenName: appScreenNames.ALL_TRANSACTIONS,
     component: AllTransactions,
+  },
+  {
+    screenName: appScreenNames.TOP_UP,
+    component: TopUp,
+  },
+  {
+    screenName: appScreenNames.PAYMENT_METHOD,
+    component: PaymentMethod,
+  },
+  {
+    screenName: appScreenNames.BANK_TRANSFER,
+    component: BankTransfer,
+  },
+  {
+    screenName: appScreenNames.PAY_WITH_BANK,
+    component: PayWithBank,
   },
 ];

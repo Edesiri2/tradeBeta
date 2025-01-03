@@ -24,7 +24,7 @@ import axios from "axios";
 import { Post } from "@src/api/request";
 
 export const Customer = () => {
-  const { setIsAuthenticated, setUserData, userRole, setUserRole } =
+  const { setIsAuthenticated, setUserData, setUserRole, setToken } =
     useAuthStore();
   const [isChecked, setChecked] = useState<boolean>(false);
   const navigation: NavigationProp<AuthStackParamList> = useNavigation();
@@ -41,10 +41,10 @@ export const Customer = () => {
     try {
       const { status, data } = await Post("/api/user/login", values, {});
       if (status === 200) {
-        const { token, user } = data;
-        console.log(token, user);
+        console.log("Data001:", data);
+        setUserData(data?.data?.user);
+        setToken(data?.data?.token);
         setIsAuthenticated(true);
-        setUserData(user);
         setUserRole("Customer");
       } else {
         console.log("Invalid credentials");
